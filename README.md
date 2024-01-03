@@ -1,5 +1,5 @@
 # Zusammenfassung Java für C++ Programmierer
-**Dozent:** Frieder Loch
+**Dozent:** Frieder Loch  
 **Semester:** 3. Semester Elektrotechnik, HS 2023
 
 
