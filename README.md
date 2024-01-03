@@ -1,2 +1,6 @@
-# SumJavaCPP
-Zusammenfassung: Java für C++ Programmierer, HS2023, Prof. Frieder Loch
+# Zusammenfassung Java für C++ Programmierer
+**Dozent:** Frieder Loch
+**Semester:** 3. Semester Elektrotechnik, HS 2023
+
+
+Bei Fehlern oder Ergänzungen bitte ein [neues Issue erstellen](https://github.com/P4ntomime/SumJavaCPP/issues/new/choose).

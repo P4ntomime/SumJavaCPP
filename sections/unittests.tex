@@ -1,10 +1,21 @@
 \section{Unit Tests}
-\subsection{Konzept}
-\begin{itemize}
-    \item Test von abgenzbarem Programmteil (Unit)
-    \item Regressionstest: hat eine Änderung die bestehenden Funktionen geschädigt?
-\end{itemize}
-\vspace{-0.8\abovedisplayskip}
+
+\begin{minipage}[t]{0.65\columnwidth}
+    \subsection{Konzept}
+    \begin{itemize}
+        \item Test von abgenzbarem Programmteil (Unit)
+        \item Regressionstest: hat eine Änderung die bestehenden Funktionen geschädigt?
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.31\columnwidth}
+    \subsection{Blackbox-Test}
+    \begin{tikzpicture}[>=Stealth]
+        \node[minimum height=6mm, fill=black, text=white] (bbox) at (0,0) {Code};
+        \draw[<-] (bbox.west) -- ++(-1,0) node[midway, above=-0.7mm] {Input};
+        \draw[->] (bbox.east) -- ++(1,0) node[midway, above=-0.7mm] {Output};
+    \end{tikzpicture}
+\end{minipage}
+\vspace{-0.5\abovedisplayskip}
 \begin{center}
     \begin{tikzpicture}[every node/.style={draw=black, 
         fill=basegreen, 
@@ -28,9 +39,9 @@
         \end{scope}
     \end{tikzpicture}
 \end{center}
-\vspace{-\abovedisplayskip}
+\vspace{-1.3\abovedisplayskip}
 
-% TODO: fit on page
+
 \subsection{Äquivalenzklassenbildung}
 \vspace{-0.8\abovedisplayskip}
 \begin{minipage}[t]{0.5\columnwidth}
@@ -45,14 +56,20 @@
 \end{minipage}
 
 \subsection{Aufbau Testmethode}
-\lstinputlisting{snippets/archunit.java}
-\begin{itemize}
-    \item Keine Parameter
-    \item Rückgabetyp \lstinline{void}
-    \item \lstinline{¦¦@Test}-Annotation
-    \item Asserts um Werte zu prüfen
-    \item Testmethoden isoliert von anderen Testmethoden
-\end{itemize}
+\begin{minipage}[t]{0.65\columnwidth}
+    \vspace{-0.8\abovedisplayskip}
+    \lstinputlisting{snippets/archunit.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.34\columnwidth}
+    \raggedright%
+    \begin{itemize}
+        \item Keine Parameter
+        \item Rückgabetyp \lstinline{void}
+        \item \lstinline{¦¦@Test}-Annotation
+        \item Asserts um Werte zu prüfen
+        \item Testmethoden isoliert von anderen Testmethoden
+    \end{itemize}
+\end{minipage}
 
 \subsection{Asserts}
 \begin{minipage}[t]{0.54\columnwidth}
@@ -73,13 +90,10 @@
 \end{minipage}
 
 \subsection{FIRST-Prinzip}
-\begin{tabularx}{\columnwidth}{@{\hspace{1.3mm}}l X@{}}
-    \tabitem{} \textbf{\cgn{F}}ast: &Ausführung ist schnell\\
-    \tabitem{} \textbf{\cgn{I}}ndependent: &Reihenfolge der Tests ist nicht relevant.\\
-    \tabitem{} \textbf{\cgn{R}}epeatable: &Ergebnis ändert sich nur wenn sich Implementierung ändert.\\
-    \tabitem{} \textbf{\cgn{S}}elf-validating: &Testergebnis benötigt keine Interpretation.\\
-    \tabitem{} \textbf{\cgn{T}}imely: &Tests werden früh geschrieben.
-\end{tabularx}
-
-
-% TODO: Blackbox-Test
+\begin{tabular}{@{\hspace{1.3mm}}l l@{}}
+    \tabitem\textbf{\cgn{F}}ast: &Ausführung ist schnell\\
+    \tabitem\textbf{\cgn{I}}ndependent: &Reihenfolge der Tests ist nicht relevant.\\
+    \tabitem\textbf{\cgn{R}}epeatable: &Ergebnis ändert sich nur wenn sich Implementierung ändert.\\
+    \tabitem\textbf{\cgn{S}}elf-validating: &Testergebnis benötigt keine Interpretation.\\
+    \tabitem\textbf{\cgn{T}}imely: &Tests werden früh geschrieben.
+\end{tabular}
