@@ -1,0 +1,44 @@
+\section{Klassen}
+
+\subsection{Definition}
+Eine Klasse spezifiziert die Gemeinsamkeiten einer Menge von Objekten mit denselben Eigenschaften, 
+demselben Verhalten und denselben Beziehungen. [Balzert]
+
+
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsection{Aufbau}
+    % \vspace{-2mm}
+    \lstinputlisting{snippets/klasse.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{Konstruktor}
+    \raggedright%
+    \begin{itemize}
+        \item Initialisiert ein Objekt/eine Klasse
+        \item Hat keinen Rückgabewert
+        \item Hat gleichen Namen wie Klasse
+        \item Kann überladen werden
+        \item Compiler erzeugt einen Standardkonstruktor, wenn kein Konstruktor definiert ist
+    \end{itemize}
+\end{minipage}
+
+
+\begin{minipage}[t]{0.41\columnwidth}
+    \subsection{\textsf{\textbf{\textcolor{keywordcolour}{null}}}-Referenz}
+    \raggedright%
+    \begin{itemize}
+        \item Referenz auf "kein Objekt"
+        \item Meist zur Initialisierung von Referenzen verwendet
+        \item Gültig für alle Referenztypen
+        \item Dereferenzierung führt zu \lstinline{NullPointerException}
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.59\columnwidth}
+    \raggedright%
+    \subsection{Selbstreferenz}
+    Zur Selbstreferenz wird das Schlüsselwort \lstinline{this} verwendet.
+    
+    \subsection{Instanziierung}
+    Objekte werden mit dem \lstinline{new}-Operator erzeugt (instanziiert): \mylstbox{Rectangle r = new Rectangle();}
+\end{minipage}
+

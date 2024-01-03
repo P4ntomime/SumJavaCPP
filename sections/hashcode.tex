@@ -1,0 +1,65 @@
+\section{HashCode-Methode / Hashing}
+\subsection{HashCode-Methode}
+\begin{itemize}
+    \item Muss überschrieben werden, wenn \lstinline{equals()} überschrieben wird.
+    \item Gibt einen Hashcode zurück, der für gleiche Objekte gleich ist.
+    \item Sollte möglichst effizient sein.
+\end{itemize}
+
+\subsection{Syntax}
+
+\lstinputlisting{snippets/hashcode.java}
+Bei mehreren Instanzvariablen: Hashcodes der Instanzvariablen mit verschiedenen Primzahlen multiplizieren und addieren.
+
+\subsection{Hashing}
+\begin{itemize}
+    \item Elemente werden auf Array (Hash-Tabelle) verstreut.
+    \item Hash-Code wird aus Objekt berechnet und bestimmt den Index.
+\end{itemize}
+
+\subsubsection{Regeln}
+\mylstbox{x.equals(y)}\textrightarrow\mylstbox{x.hashCode() == y.hashCode()}
+\begin{itemize}
+    \item Umkehrung gilt nicht notwendigerweise.
+    \item Überschreibung von \lstinline{equals()} erfordert Überschreibung von \lstinline{hashCode()}.
+\end{itemize}
+
+\subsubsection{Beispiel}
+\begin{tikzpicture}
+    \begin{scope}[every node/.style={text=white, minimum width=1.5cm, minimum height=0.8cm, rounded corners=2mm, align=center}]
+        \node[fill=redcontrast] (abc) at (0,0) {Message\\"ABC"};
+        \node[fill=basegreen, below=3mm of abc] (def) {Message\\"DEF"};        
+    \end{scope}
+
+    \begin{scope}[every node/.style={single arrow, draw, minimum height=7mm, single arrow head extend=1mm}]
+        \node[right=2mm of abc.east] (arr1) {};
+        \node[right=2mm of def.east] (arr2) {};        
+    \end{scope}
+
+    \node[right=0mm of arr1.east] (hc1) {\lstinline{hashCode() == 4}};
+    \node[right=0mm of arr2.east] (hc2) {\lstinline{hashCode() == 2}};
+
+    \matrix[row sep = -0.1mm,matrix anchor=idx3.west, nodes={draw, minimum width=1.5cm, minimum height=0.4cm}, right=1cm of hc2.east]
+    {
+        \node (idx0) {Index 0}; \\
+        \node {}; \\
+        \node (idx3) {}; \\
+        \node {}; \\
+        \node (idx5) {}; \\
+    };
+    \node[above=0mm of idx0, align=center] {Hash-Tabelle};
+
+    \begin{scope}[>=Stealth]
+        \draw[->] (hc1.east) -- (idx5.west);
+        \draw[->] (hc2.east) -- (idx3.west);
+    \end{scope}
+
+    \begin{scope}[every node/.style={text=white, minimum width=1.5cm, minimum height=0.8cm, rounded corners=2mm, align=center}]
+        \node[fill=redcontrast, right=5mm of idx5.east] (abc2) {Message\\"ABC"};
+        \node[fill=basegreen, right=5mm of idx3.east] (def2) {Message\\"DEF"};        
+    \end{scope}
+    \begin{scope}[cbase /.tip={Arc Barb[reversed, line width=1pt, width=2pt, length=1pt]},>=Stealth]
+        \draw[{cbase}->] (idx5.east) -- (abc2.west);
+        \draw[{cbase}->] (idx3.east) -- (def2.west);
+    \end{scope}
+\end{tikzpicture}

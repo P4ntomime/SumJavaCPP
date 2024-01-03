@@ -1,0 +1,65 @@
+\section{Binding}
+Bei Referenzen wird zwischen statischem und dynamischem Binding unterschieden.
+\vspace{-0.7\abovedisplayskip}
+\begin{lstlisting}[numbers=none, 
+    escapechar=!, 
+    xleftmargin=-3mm, 
+    linewidth=0.39\columnwidth,
+    framexleftmargin=-3mm]
+    Vehi!\tikz[overlay, remember picture]\node[xshift=-0.5mm,yshift=-0.5mm](statnode){};!cle vehicle = new Ca!\tikz[overlay, remember picture]\node[xshift=-0.5mm,yshift=-0.5mm](dynnode){};!r();
+\end{lstlisting}
+\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=west] (t2) at (3.9,0.2) {Dynamischer Typ};
+    \node[anchor=west] (t1) at (6.1,-0) {Statischer Typ};
+    \draw[rounded corners=2pt,-{Stealth}] (t1.west) -| (statnode);
+    \draw[rounded corners=1pt,-{Stealth}] (t2.west) -| (dynnode);
+\end{tikzpicture}
+
+\subsection{Statische Bindung}
+\vspace{-0.8\abovedisplayskip}
+\begin{minipage}[t]{0.59\columnwidth}
+    \lstinputlisting{snippets/sbinding1.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.4\columnwidth}
+    \lstinputlisting{snippets/sbinding2.java}
+\end{minipage}
+
+\begin{minipage}[t]{0.52\columnwidth}
+    \subsection{Dynamische Bindung}
+    \raggedright%
+    Bei Aufruf nicht-privater Instanzmethoden wird Methode gemäss dynamischem Typ des Objekts aufgerufen.
+    \lstinputlisting{snippets/dbinding1.java}
+    \begin{tikzpicture}
+        \node[draw=bluecontrast, minimum width=0.5cm, minimum height=0.2cm, inner sep=0mm] (v) at (0.5,-2) {};
+        \node[text=bluecontrast, above=0mm of v] {vehicle};
+        \node[draw=basegreen, rounded corners=2mm, text width=3.6cm, align=center] (co) at (3,-2) {\begin{lstlisting}[numbers=none,
+            xleftmargin=0.1mm,
+            xrightmargin=0.1mm,
+            linewidth=\columnwidth,
+            framexleftmargin=0mm,
+            framextopmargin=0mm,
+            framexbottommargin=0mm,
+            aboveskip=-1mm,
+            belowskip=0mm,
+            backgroundcolor=\color{white}]
+    report() {
+    System.out.println("Car");
+    }\end{lstlisting}};
+        \node[text=basegreen, above=0mm of co.north west, anchor=south west] {Car-Objekt};
+        \draw[-{Stealth}] (v.center) -- (co.west);
+    \end{tikzpicture}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.45\columnwidth}
+    \subsection{Details}
+    \subsubsection{Statische Bindung bei\ldots}
+    \begin{itemize}
+        \item \ldots Konstruktoren
+        \item \ldots privaten Methoden
+        \item \ldots statischen Methoden
+    \end{itemize}
+    
+    \subsubsection{Dynamische Bindung bei\ldots}
+    \begin{itemize}
+        \item \ldots nicht-privaten Instanzmethoden
+    \end{itemize}
+\end{minipage}

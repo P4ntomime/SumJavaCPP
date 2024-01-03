@@ -1,0 +1,1 @@
+Files.write(Path.of("out.txt"), data);

@@ -1,0 +1,71 @@
+\section{Vererbung}
+
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsection{Syntax}
+    \lstinputlisting{snippets/vererbung.java}
+    \subsection{Vererbung in Java}
+    \begin{itemize}
+        \item Subklassen erben alle Attribute und Methoden aller Superklassen, die nicht \lstinline{private} sind.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\columnwidth}
+    \subsection{Vererbungshierarchie}
+    \begin{tikzpicture}[>=Stealth, draw=none]
+        \begin{scope}[every node/.style={
+            rectangle split,
+            rectangle split parts=2, 
+            draw=basegreen, 
+            minimum width=1.3cm, 
+            minimum height=2cm}]
+            \node (v) at (0,0) {Vehicle \nodepart{two}\phantom{V}};
+            \node (c) at (1,-1.5) {Car \nodepart{two}\phantom{V}};
+            \node (b) at (-1,-1.5) {Bike \nodepart{two}\phantom{V}};
+        \end{scope}
+        \node[above=0mm of v, text width=1.3cm, align=center] {\small Basisklasse / Superklasse};
+        \node[below=0mm of c, text width=2cm, align=center] {\small abgeleitete Klasse / Subklasse};
+        \node[below=0mm of b, text width=2cm, align=center] {\small abgeleitete Klasse / Subklasse};
+        \draw[-{Triangle[open]}, draw=basegreen] (c.north) -- (v);
+        \draw[-{Triangle[open]}, draw=basegreen] (b.north) -- (v);
+        \draw[->, draw=basegreen] ({(-2.1,-0.5)} |- v.north west) to node[above, rotate=-90, align=center]{Spezialisierung} ({(-2.1,-0.5)} |- c.south west);
+        \draw[->, draw=basegreen] ({(2.1,-0.5)} |- b.south east) to node[above, rotate=90, align=center]{Generalisierung} ({(2.1,-0.5)} |- v.north east);
+    \end{tikzpicture}
+\end{minipage}
+
+
+
+\subsection{Object}
+Alle Klassen erben implizit von der Klasse \lstinline{Object}. Diese stellt folgende Methoden zur Verfügung:
+\begin{itemize}
+    \item \lstinline{public boolean equals(Object obj)}: Vergleicht zwei Objekte auf Gleichheit
+    \item \lstinline{public String toString()}: Gibt eine String-Repräsentation des Objekts zurück
+    \item \lstinline{public int hashCode()}: Gibt einen Hashcode für das Objekt zurück
+\end{itemize}
+Diese Methoden können in jeder Klasse überschrieben werden, um sie an die jeweiligen Bedürfnisse anzupassen.
+
+\subsection{Polymorphie}
+
+\begin{minipage}[t]{0.65\columnwidth}
+    Ein Objekt ist mit seinem Typ, sowie Typen aller Superklassen kompatibel. Jedoch nicht mit Typen von Subklassen.
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.34\columnwidth}
+    \begin{itemize}
+        \item \mylstbox{Car c = new Car();}
+        \item \mylstbox{Vehicle v = c;}
+        \item \mylstbox{Object o = v;}
+    \end{itemize}
+\end{minipage}
+
+\subsubsection{Overriding}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.5\columnwidth}
+    \lstinputlisting{snippets/overriding1.java}
+\end{minipage}
+\begin{minipage}[t]{0.49\columnwidth}
+    \lstinputlisting{snippets/overriding2.java}
+\end{minipage}
+\begin{itemize}
+    \item Methoden können in Subklassen überschrieben werden
+    \item Signatur \textbf{muss} gleich sein
+    \item \lstinline{¦¦@Override} Annotation ist optional, aber empfohlen
+    \item Falls eine Klasse eine Superklasse, sowie ein Interface implementieren/erweitern sollte, so muss zuerst \lstinline{extends} \textit{SuperKlasse} und dann \lstinline{implements} \textit{Schnittstelle} stehen (mit Leerzeichen dazwischen, kein Komma).
+\end{itemize}

@@ -1,0 +1,223 @@
+\section{Input/Output}
+% DONE: rename to Input/Output
+% DONE: Byte Streams
+% DONE: Character Stream
+% DONE: File I/O
+    % DONE: Zeilenweise lesen
+% TODO: Wichtige Methoden
+% DONE: Standard I/O
+    % DONE: Zeilenweise lesen 
+% TODO: Klassenhierarchie
+% TODO: Exceptions
+% TODO: "einfachste Zugriffe"
+
+\subsection{Streams allgemein}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsubsection{Input Stream}
+    \begin{itemize}
+        \item Daten \textbf{von aussen} lesen
+        \item Tastatur, Netzwerk, Dateien, \ldots
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{Output Stream}
+    \begin{itemize}
+        \item Daten \textbf{nach aussen} schreiben
+        \item Bildschirm, Netzwerk, Dateien, \ldots
+    \end{itemize}
+\end{minipage}
+
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsection{Byte Streams}
+    \raggedright%
+    \begin{itemize}
+        \item Byteweises lesen (8-Bit Daten)
+        \item Erben von: \lstinline{InputStream}, \lstinline{OutputStream}
+        \item Beispiel: \lstinline{FileInputStream}, \lstinline{FileOutputStream}
+        \item Close bei Exceptions: \lstinline{in.close()} in \lstinline{finally}-Block
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsection{Character Streams}
+    \raggedright%
+    \begin{itemize}
+        \item Unicode mit 16-Bit (UTF-16) codiert
+        \item Erben von: \lstinline{Reader}, \lstinline{Writer}
+        \item Zeichen-/Zeilenweise Ein- \& Ausgabe
+    \end{itemize}
+\end{minipage}
+
+
+\subsubsection{\textsf{InputStream}}
+\lstinputlisting{snippets/inputstream.java}
+\begin{itemize}
+    \item Lese \lstinline{length} Bytes in Array \lstinline{b} ab Index \lstinline{offset}
+    \item Rückgabe = gelesene Bytes (-1 \textlrarrow{} end of stream)
+\end{itemize}
+
+\subsubsection{\textsf{OutputStream}}
+\lstinputlisting{snippets/outputstream.java}
+\begin{itemize}
+    \item Schreibt eventuell noch im Cache zwischengespeicherte Ausgaben
+    \item Implizit bei \lstinline{close()}
+\end{itemize}
+
+\subsection{File-Input}
+% \subsubsection{Beispiel}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.6\columnwidth}
+    \lstinputlisting[escapechar=!]{snippets/fileinput.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.39\columnwidth}
+    \begin{tikzpicture}[
+        every node/.style={
+            align=center,
+            minimum width=2cm,
+            minimum height=8mm,
+            draw,
+            rounded corners=2mm},
+        every path/.style={
+            rounded corners=2pt},
+        remember picture, 
+        overlay,
+        >=Stealth]
+        \node[text width=2.2cm, right=1.7cm of fileinnew] (fintxt) {Bestehende Datei zum Lesen öffnen};
+        \node[below=2mm of fintxt] (eof) {-1: end of file};
+        \node[text width=2cm, below=2mm of eof] (read) {Gelesenes Byte (wenn positiv)};
+        \draw[->] (fintxt.west) -- (fileinnew.east);
+        \draw[->] (eof.west) -- ++(-1cm,0) |- (fileineof.east);
+        \draw[->] (read.west) -- ++(-1.5cm,0) |- (fileinread.east);
+    \end{tikzpicture}
+\end{minipage}
+
+\subsection{File-Output}
+% \subsubsection{Beispiel}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.6\columnwidth}
+    \lstinputlisting[escapechar=!]{snippets/fileoutput.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.39\columnwidth}
+    \begin{tikzpicture}[
+        every node/.style={
+            align=center,
+            minimum width=2cm,
+            minimum height=8mm,
+            draw,
+            rounded corners=2mm},
+        every path/.style={
+            rounded corners=2pt},
+        remember picture, 
+        overlay,
+        >=Stealth]
+        \node[text width=2.2cm] (fouttxt) at (fileoutnew.east -| fintxt.south) {Datei neu andlegen bzw. überschreiben};
+        \node[text width=2cm] (foutappend) at (fileoutappend.east -| fouttxt.south) {An Datei anhängen, falls existiert};
+        \node[text width=3cm] (foutclose) at ($(fouttxt.south)!0.5!(foutappend.north)$) {Schreiben des Rests beim Schliessen ("Flush")};
+        \draw[->] (fouttxt.west) -- (fileoutnew.east);
+        \draw[->] (foutclose.west) -- ++(-1cm,0) |- (fileoutclose.east);
+        \draw[->] (foutappend.west) -- (fileoutappend.east);
+    \end{tikzpicture}
+\end{minipage}
+
+
+\subsection{Einfachster Dateizugriff}
+
+\begin{minipage}[t]{0.67\columnwidth}
+    Ganze Datei binär einlesen:
+    \lstinputlisting[escapechar=!]{snippets/fileinput2.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.32\columnwidth}
+    \begin{tikzpicture}[
+        every node/.style={
+            align=center,
+            minimum width=2.5cm,
+            text width=2.5cm,
+            minimum height=8mm,
+            draw,
+            rounded corners=2mm},
+        every path/.style={
+            rounded corners=2pt},
+        remember picture, 
+        overlay,
+        >=Stealth]
+        \node (readall) at ($(fileinreadall.south -| fintxt.south)+(0,-3mm)$) {Speicherintensiv bei grossen Dateien};
+        \draw[->] (readall.west) -| (fileinreadall.south);
+    \end{tikzpicture}
+\end{minipage}
+    
+\vspace{3mm}
+\begin{minipage}[t]{0.48\columnwidth}
+    Ganze Datei binär schreiben:
+    \lstinputlisting{snippets/fileoutput2.java}
+\end{minipage}
+
+\subsection{Standard I/O}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.4\columnwidth}
+    \subsubsection{\textsf{System.in}}
+    \begin{itemize}
+        \item \lstinline{InputStream}
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.59\columnwidth}
+    \subsubsection{\textsf{System.out} und \textsf{System.err}}
+    \begin{itemize}
+        \item \lstinline{PrintStream} (Subklasse von \lstinline{OutputStream})
+    \end{itemize}
+\end{minipage}
+
+\subsection{File-Reader}
+\begin{minipage}[t]{0.55\columnwidth}
+    \vspace{-0.8\abovedisplayskip}
+    \lstinputlisting{snippets/filereader.java}
+\end{minipage}
+\begin{minipage}[t]{0.44\columnwidth}
+    \raggedright%
+    \begin{itemize}
+        \item Systemabhängiges Character Set
+        \item \lstinline{val = -1} \textrightarrow{} end of file
+        \item value ist 16-Bit Unicode char
+    \end{itemize}
+\end{minipage}
+\subsection{File-Writer}
+\begin{minipage}[t]{0.6\columnwidth}
+    \vspace{-0.8\abovedisplayskip}
+    \lstinputlisting{snippets/filewriter.java}
+\end{minipage}
+\begin{minipage}[t]{0.39\columnwidth}
+    \raggedright%
+    \begin{itemize}
+        \item \lstinline{true} \textrightarrow{} append
+        \item \lstinline{.write("")} String schreiben
+        \item \lstinline{.write('')} Einzelnen char schreiben
+    \end{itemize}
+\end{minipage}
+
+\subsection{Zeilenweise lesen (\textcolor{coralcontrast}{\textsf{InputStream}})}
+\begin{tikzpicture}[
+    every node/.style={
+    align=center,
+    minimum width=8mm,
+    minimum height=1cm,
+    draw,
+    rounded corners=2mm},
+    >=Stealth]
+    \node[text=basegreen, draw=basegreen] (br1) at (0,0) {BufferedReader};
+    \node[text width=2.3cm, right=0.5cm of br1] (fr1) {FileReader \textcolor{coralcontrast}{InputStreamReader}};
+    \node[draw=coralcontrast, text=coralcontrast, right=0.5cm of fr1] (fis1) {FileInputStream};
+    \node[rounded corners=0mm, right=0.5cm of fis1] (f1) {File};
+    \begin{scope}[
+        every node/.style={
+            text depth=0pt, 
+            anchor=base,
+            draw=none}]
+        \node[text=basegreen, below=0mm of br1] (brst) {Zeilenweiser Buffer};
+        \node[below=0mm of fr1] (frst) {Character Stream};
+        \node[text=coralcontrast, below=0mm of fis1] (fisst) {Byte Stream};
+    \end{scope}
+    \draw[->] (br1) -- (fr1);
+    \draw[->] (fr1) -- (fis1);
+    \draw[->] (fis1) -- (f1);
+\end{tikzpicture}
+
+% \vfill\null%

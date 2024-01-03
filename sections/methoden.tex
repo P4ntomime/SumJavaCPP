@@ -1,0 +1,54 @@
+\section{Methoden}
+% TODO: tbd
+\subsection{Aufruf}\vspace{-2mm}
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{Aufruf ohne Argumente}
+    \mylstbox{starLine();}
+\end{minipage}
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsubsection{Aufruf mit Argumenten}
+    \mylstbox{symbolLine('*', 5);}
+\end{minipage}
+
+\subsection{Call by Value}
+\begin{itemize}
+    \item Wert des Arguments wird in Parameter kopiert
+    \item Änderung der Parameter ausserhalb Funktion nicht sichtbar
+\end{itemize}
+
+\subsubsection{Mit Referenztypen}
+Referenz des Arguments wird in Parameter kopiert.
+\begin{itemize}
+    \item Änderung am Objekt sichtbar
+    \item Änderung an der Referenz nicht sichtbar
+\end{itemize}\vspace{-3mm}
+\begin{minipage}[t]{0.49\columnwidth}
+    \lstinputlisting{snippets/callbyvalref.java}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\columnwidth}
+    \lstinputlisting{snippets/callbyvalref2.java}
+\end{minipage}
+
+\subsection{Deklaration}
+\vspace{-2mm}
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{Deklaration ohne Parameter}
+    \lstinputlisting{snippets/method.java}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsubsection{Deklaration mit Parameter}
+    \lstinputlisting{snippets/method2.java}
+\end{minipage}
+
+\subsection{Rückgabewert}
+\lstinline{return}-Anweisung zwingend, ausnahme: \lstinline{void}-Methoden
+
+\subsection{Modifiers (gelten auch für Klassen und Variablen)}
+\begin{itemize}
+    \item \lstinline{public}: von überall aus sichtbar
+    \item \lstinline{private}: nur innerhalb der Klasse sichtbar
+    \item \lstinline{protected}: nur innerhalb der Klasse und von Subklassen sichtbar
+    \item \lstinline{static}: Methode gehört zur Klasse, nicht zu einem Objekt (Instanziierung der Klasse nicht nötig)
+    \item \lstinline{final}: Methode kann nicht überschrieben werden
+    \item \lstinline{abstract}: Methode muss in Subklasse überschrieben werden
+\end{itemize}

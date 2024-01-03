@@ -1,0 +1,144 @@
+\section{Schnittstellen}
+
+
+\subsection{Syntax}
+\begin{minipage}[t]{0.51\columnwidth}
+    \raggedright%
+    \begin{itemize}
+        \item Implizit \lstinline{public} und \lstinline{abstract}. (Andere Modifikatoren nicht erlaubt)
+        \item Alle Methoden müssen von der implementierenden Klasse implementiert werden, sofern diese nicht \lstinline{abstract} ist.
+        \item Methoden dürfen keine Implementierung im Interface haben.
+        \item Interfaces können nicht instanziiert werden.
+        \item Eine Implementierung kann mehrer Interfaces implementieren.
+        \item Falls mehrere Methoden mit gleichem Namen existieren, wird nur eine Methode implementiert.
+        \item Konstanten werden automatisch als \lstinline{public static final} deklariert.
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.48\columnwidth}
+    \vspace{-0.8\abovedisplayskip}
+    \lstinputlisting{snippets/interface1.java}
+    \lstinputlisting{snippets/interface2.java}
+\end{minipage}
+
+
+% \begin{minipage}[t]{0.51\columnwidth}
+%     \raggedright%
+%     \begin{itemize}
+%         \end{itemize}
+% \end{minipage}\hfill%
+% \begin{minipage}[t]{0.48\columnwidth}
+%     \vspace{-0.8\abovedisplayskip}
+% \end{minipage}
+% ugly workaround to use less space
+% FIXME: find a better solution
+\begin{itemize}
+    \item Falls mehrere Konstanten mit demselben Namen existieren, muss der Name des Interfaces vorangestellt werden.
+    \item Schnittstellen können andere Schnittstellen erweitern mit \lstinline{extends}.
+\end{itemize}
+
+
+\subsection{Lose Kopplung}
+Mittels loser Kopplung können mehrere Teams einfach miteinander arbeiten. 
+Die Teams müssen sich nur auf die Schnittstelle einigen. 
+Die Implementierung kann unabhängig voneinander erfolgen.
+
+\begin{minipage}[t]{0.52\columnwidth}
+    \subsection{Abstrakte Klassen}
+    Klasse, die nicht instanziiert werden kann und mindestens eine abstrakte Methode enthält.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\columnwidth}
+    \subsection{Abstrakte Methoden}
+    Deklaration einer Methode ohne Implementierung. Geht nur in abstrakten Klassen und Interfaces.
+    \lstinputlisting{snippets/abstractmethod.java}
+\end{minipage}
+
+\vspace{-7mm}
+\subsection{Set-Interface}
+Menge von Elementen ohne Duplikate.
+\subsubsection{Methoden}
+\begin{itemize}
+    \item \lstinline{boolean add(E e)}: Fügt Element hinzu, wenn nicht bereits vorhanden
+    \item Gleichheitsprüfung mit \lstinline{equals()}
+\end{itemize}
+
+\subsubsection{Beispiel}
+\lstinputlisting{snippets/set.java}
+\subsection{Map-Interface}
+\begin{itemize}
+    \item Objekt, das Schlüssel auf Werte abbildet.
+    \item Kann keine Duplikate von Schlüsseln enthalten.
+    \item Jeder Schlüssel kann höchstens einem Wert zugeordnet werden.
+\end{itemize}
+\begin{minipage}[t]{0.31\columnwidth}
+    \subsubsection{Visualisierung}
+    \begin{tikzpicture}[every node/.style={align=center}, >=Stealth]
+        \def\deltay{1.5mm}
+        \def\minheight{8mm}
+        \begin{scope}[every node/.style={text=redcontrast, minimum height=\minheight}]
+            \node[minimum height=0.2cm] (keyname) at (0,0) {Matrikelnr.};
+            \node[below=1mm of keyname] (key1) {20000};
+            \node[below=\deltay of key1] (key2) {70000};
+            \node[below=\deltay of key2] (key3) {13000};
+        \end{scope}
+        \begin{scope}[every node/.style={align=center,fill=basegreen, text=white, draw, rounded corners=2mm, minimum width=1.3cm, minimum height=\minheight}]
+            \node[minimum height=0.2cm,fill=none,draw=none,text=basegreen,right=0mm of keyname] (valuename) {Student};
+            \node[below=1mm of valuename] (value1) {Hans\\ Kuster};
+            \node[below=\deltay of value1] (value2) {Lars\\ Peter};
+            \node[below=\deltay of value2] (value3) {Anna\\ Meier};
+        \end{scope}
+        \draw[->] (key1.east) -- (value1.west);
+        \draw[->] (key2.east) -- (value2.west);
+        \draw[->] (key3.east) -- (value3.west);
+    \end{tikzpicture}    
+\end{minipage}\hfill
+\begin{minipage}[t]{0.69\columnwidth}
+    \subsubsection{Beispiel}
+    \phantom{t}\vspace{-3mm}
+    \lstinputlisting[inputencoding=cp1252]{snippets/map.java} % map.java needs to be saved with Windows 1252 (cp1252) encoding!
+\end{minipage}
+
+\subsection{Comparator-Interface}
+\vspace{-0.8\abovedisplayskip}
+\begin{minipage}[t]{0.45\columnwidth}
+    \lstinputlisting{snippets/compintf.java}
+\end{minipage}
+\begin{minipage}[t]{0.27\columnwidth}
+    \subsubsection{Returnwert \textnormal{\textsf{\textcolor{black}{compare}}}}
+    \begin{itemize}
+        \item \textbf{< 0}: \lstinline{o1} < \lstinline{o2}
+        \item \textbf{\phantom{< }0}: \lstinline{o1} = \lstinline{o2}
+        \item \textbf{> 0}: \lstinline{o1} > \lstinline{o2}
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.26\columnwidth}
+    \subsubsection{Returnwert \textnormal{\textsf{\textcolor{black}{equals}}}}
+    \begin{itemize}
+        \item \lstinline{true}:\phantom{e} \lstinline{obj} = \lstinline{this}
+        \item \lstinline{false}: \lstinline{obj} \tikz{\node[inner sep=0mm](a) at (0,0){=}; \draw[] ($(a.south west)!0.5!(a.south)+(0,0.1mm)$) -- ($(a.north east)!0.5!(a.north)+(0,0.1mm)$);} \lstinline{this}
+    \end{itemize}
+\end{minipage}
+
+\subsection{Functional Interface}
+\begin{itemize}
+    \item Interface mit genau einer abstrakten Methode
+    \item Kann mit Lambda-Ausdrücken verwendet werden
+    \item Annotation \lstinline{¦¦@FunctionalInterface} ist optional aber empfohlen
+    \item Methodenreferenzen passen auf funktionale Interfaces
+\end{itemize}
+\subsubsection{Beispiel}
+
+\begin{minipage}[t]{0.42\columnwidth}
+    \myul{Funktionales Interface:}
+    \lstinputlisting{snippets/functionalintf1.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.57\columnwidth}
+    \myul{Implementierung:}
+    \lstinputlisting{snippets/functionalintf2.java}
+\end{minipage}
+\myul{Methodenreferenz:}
+\lstinputlisting{snippets/functionalintf3.java}
+
+\vfill\null%
+
+% DONE: Comparator Interface
+% DONE: Functional Interfaces

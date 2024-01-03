@@ -1,0 +1,2 @@
+Stack!\aftergroup\redlst!<String>!\aftergroup\endlstcol! stack1;
+Stack!\aftergroup\redlst \tikz[overlay, remember picture]\node(ta1){};!<Integer>!\tikz[overlay, remember picture]\node(ta2){}; \aftergroup\endlstcol! stack2;

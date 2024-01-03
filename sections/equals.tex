@@ -1,0 +1,26 @@
+\section{Equals-Methode}
+\begin{itemize}
+    \item Standardmässig vergleicht \lstinline{equals()} auf Referenzgleichheit.
+    \item Für Inhaltsvergleich muss \lstinline{equals()} überschrieben werden.
+    \begin{itemize}
+        \item Nur bei \lstinline{String} bereits implementiert!
+    \end{itemize}
+    \item Gibt \lstinline{true} zurück, wenn die Objekte gleich sind.
+    \item Wird \lstinline{equals()} überschrieben, muss auch \lstinline{hashCode()} überschrieben werden.
+\end{itemize}
+
+
+\begin{minipage}[t]{0.54\columnwidth}
+    \subsection{Syntax}
+    
+    \lstinputlisting{snippets/equals.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.45\columnwidth}
+    \subsection{Vergleiche}
+    \begin{itemize}
+        \item \lstinline{==} vergleicht Referenzen.
+        \item \lstinline{equals()} vergleicht Inhalte.
+        \item \lstinline{instanceof} vergleicht Typen.
+        \item \lstinline{Objects.equals()} vergleicht Inhalte und behandelt \lstinline{null} richtig.
+    \end{itemize}
+\end{minipage}

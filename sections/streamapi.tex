@@ -1,0 +1,111 @@
+\section{Stream-API}
+\begin{itemize}
+    \item Für deklarative Verarbeitung von Datenströmen
+    \item Definiere \textbf{was} gemacht werden soll, nicht \textbf{wie}
+\end{itemize}
+
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsection{Beispiel}
+    \lstinputlisting{snippets/streamapiex.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsection{Idee}
+    \begin{center}
+        \begin{tikzpicture}[every node/.style={
+            draw, 
+            text=white, 
+            rounded corners=2mm,
+            minimum width=2.1cm,
+            text width=2.1cm,
+            minimum height=7mm, 
+            align=center},
+            >=Stealth]
+            \node[fill=bluecontrast] (a) at (0,0) {Stream erzeugen};
+            \node[fill=redcontrast, below=3mm of a] (b) {Zwischen- operationen};
+            \node[fill=basegreen, below=3mm of b] (c) {Terminaloperation};
+            \draw[->] (a) -- (b);
+            \draw[->] (b) -- (c);
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}
+
+
+
+\subsection{Endliche Quellen}
+\begin{tabular}{@{\hspace{1.3mm}}ll@{}}
+    \tabitem\mylstbox{IntStream.range(0, 10)}: &Zahlen von 0 bis 9\\
+    \tabitem\mylstbox{Stream.of(2, 3, 4)}: &Eigene Aufzählung\\
+    \tabitem\mylstbox{Stream.empty()}: &Leerer Stream\\
+    \tabitem\mylstbox{Collection.stream()}: &Stream aus Collection\\
+    \tabitem\mylstbox{Stream.concat(s1, s2)}: &Verkettung zweier Streams
+\end{tabular}
+
+\subsection{Unendliche Quellen}
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsubsection{\textsf{generate()}}
+    \lstinputlisting{snippets/streamgenerate.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{\textsf{iterate()}}
+    \lstinputlisting{snippets/streamiterate.java}
+\end{minipage}
+
+\subsection{Zwischenoperationen}
+\begin{minipage}[t]{\columnwidth}
+    \raggedright%
+    Bei Collections ist es \textbf{nicht} erlaubt, diese zu ändern mit Zwischenoperationen. Auch nicht erlaubt, sind Abhängigkeiten zu äusseren, änderbaren Variablen.
+\end{minipage}
+\begin{tabular}{@{\hspace{1.3mm}}l@{\hspace{1mm}}l@{}}
+    \tabitem\mylstbox{filter(Predicate)}: &Filtern mit Predicate-Funktionsobjekt/Lambda\\
+    \tabitem\mylstbox{map(Function)}: &Projizieren mit Funktionsobjekt/Lamda\\
+    \tabitem\mylstbox{mapToInt...(Function)}: &Projizieren auf \lstinline|int|, \lstinline|long|, \lstinline|double|\\
+    \tabitem\mylstbox{sorted()}: &Sortieren mit/ohne Comparator\\
+    \tabitem\mylstbox{distinct()}: &Duplikate entfernen (\lstinline|equals()|)\\
+    \tabitem\mylstbox{limit(long n)}: &n-Elemente liefern\\
+    \tabitem\mylstbox{skip(long n)}: &n-Elemente überspringen
+\end{tabular}
+
+\subsection{Terminaloperationen}
+\begin{tabular}{@{\hspace{1.3mm}}l@{\hspace{1mm}}l@{}}
+    \tabitem\mylstbox{forEach(Consumer)}: &Pro Element Operation anwenden, meist mit Seiteneffekt\\
+    \tabitem\mylstbox{count()}: &Anzahl Elemente\\
+    \tabitem\mylstbox{min()}, \mylstbox{max()}: &Mit Comparator-Argument\\
+    \tabitem\mylstbox{average()}, \mylstbox{sum()}: &Nur für numerische Streams\\
+    \tabitem\mylstbox{findAny()}, \mylstbox{findFirst()}: &Gibt irgendein / erstes Element zurück
+\end{tabular}
+
+
+\subsection{Optional-Wrapper}
+\begin{itemize}
+    \item Wert exisitiert oder nicht
+    \item \lstinline{average()}, \lstinline{min()}, \lstinline{max()} geben \lstinline{Optional} zurück
+    \item Überprüfung mit \lstinline{isPresent()}
+\end{itemize}
+
+
+\subsection{Matching}
+\begin{itemize}
+    \item \lstinline{allMatch()}, \lstinline{anyMatch()}, \lstinline{noneMatch()}
+    \item Prüfen ob Prädikat auf alle/irgendein/kein Element zutrifft
+\end{itemize}
+
+
+\subsection{Lazy Evaluation}
+\begin{itemize}
+    \item Element wird erst bereitgestellt, wenn Nahcfolger Element anfordert
+    \item Unendliche Streams sind meist Lazy
+\end{itemize}
+
+
+\subsection{Collectors}
+\begin{tabular}{@{\hspace{1.3mm}}l@{\hspace{1mm}}l@{}}
+    \tabitem\mylstbox{Collectors.toList()}: &Liste aller Elemente\\
+    \tabitem\mylstbox{Collectors.toCollection(TreeSet::new)}: &In beliebige Collection abbilden\\
+    \tabitem\mylstbox{Collectors.groupingBy(key, aggregator)}: &Gruppierung, Aggregator optional\\
+    \multicolumn{2}{l}{\phantom{\tabitem}Aggregator: (\lstinline|averaging|, \lstinline|summing|, \lstinline|counting|)}
+\end{tabular}
+
+
+\subsection{Gruppierungen}
+\lstinputlisting{snippets/streamgrouping1.java}
+\lstinputlisting{snippets/streamgrouping2.java}

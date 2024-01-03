@@ -1,0 +1,1 @@
+byte[] data = Files.readAl!\tikz[overlay, remember picture]\node[xshift=-0.5mm](fileinreadall){};!lBytes(Path.of("in.txt"));

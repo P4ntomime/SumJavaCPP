@@ -1,0 +1,35 @@
+- Klassen++
+- Testing++
+- Vererbung++
+- Listen (ArrayList++, LinkedList)
+- Boxing/Unboxing++
+- Substitutionsprinzip
+- Statische/Dynamische Bindung++
+- Polymorphismus++
+- Statische/Dynamische Typen++
+- List-Interface++
+- Lose Kopplung
+- Generics
+- Iterator (generische Interfaces)
+- Exceptions
+    - Checked, unchecked
+- Predicate
+- Lambda functions
+    - Variables used inside have to be final (some workarounds possible)
+- Methodenreferenzen (bei Compares und Predicate)
+- Comparator-Interface
+- Stream-API
+    - "Deklarativer Ansatz"
+    - Zwischenoperationen
+- Input/Output
+    - File I/O
+    - Tastatur
+    - Netzwerk
+    - Scanner Objekt
+- evtl. RegEx
+- Frontend
+    - meist web-basiert (electron, angular, react, vue)
+- Frontend<->Backend
+    - Java <- HTML: requests (get, post)
+    - Java -> HTML: response (tbd: format)
+    - 

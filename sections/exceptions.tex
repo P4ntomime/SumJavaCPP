@@ -1,0 +1,211 @@
+\section{Exceptions}
+
+\begin{minipage}[t]{0.6\columnwidth}
+    \subsection{Checked Exceptions}
+    \raggedright%
+    Bei Methodendeklaration müssen Exceptions angegeben werden, welche gechecked werden müssen.
+    \lstinputlisting{snippets/exceptchecked.java}
+    Es können nach \lstinline{throws} auch mehrere Exceptions mit Komma separiert angegeben werden.
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.4\columnwidth}
+    \subsection{Unchecked Exceptions}
+    \raggedright%
+    \begin{itemize}
+        \item Keine \lstinline{throws}-Deklaration und keine Behandlung nötig
+        \item \lstinline{RuntimeException} und \lstinline{Error} sowie Subklassen
+        \item Behebung nur durch Änderung des Codes
+    \end{itemize}
+\end{minipage}
+
+\vspace{-1.3cm}
+\begin{minipage}[t]{0.65\columnwidth}
+    \subsection{Exceptions behandeln}
+    Exceptions werden mit \lstinline{try-catch}-Blöcken behandelt.
+    \lstinputlisting{snippets/exceptcatch.java}
+\end{minipage}\hfill%
+\raisebox{1.4cm}{\begin{minipage}[t]{0.325\columnwidth}
+    \subsection{Ablauf}
+    \subsubsection{Normalfall}
+    \begin{tikzpicture}[every node/.style={draw, 
+        fill=bluecontrast, 
+        text=white, 
+        text width=1.4cm, 
+        minimum height=3mm,
+        inner sep=0mm, 
+        text depth=3mm,
+        text height=2mm,
+        align=flush left}, >={Stealth[length=1.25mm]}]
+        \node at (0,-0.5) (try) {try};
+        \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+        \draw[->] (0,0) -- (try.north);
+        \draw[white, ->] (try.north) -- (try.south);
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->] (try.south) -- (try.south |- catch.south);
+        \draw[->] (try.south |- catch.south) -- +(0,-0.25);
+        \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
+    \end{tikzpicture}
+
+    \subsubsection{Ausnahmefall}
+    \begin{tikzpicture}[>={Stealth[length=1.25mm]}]
+        \begin{scope}[every node/.style={draw, 
+            fill=bluecontrast, 
+            text=white, 
+            text width=1.4cm, 
+            minimum height=3mm,
+            inner sep=0mm, 
+            text depth=3mm,
+            text height=2mm,
+            align=flush left}]
+            \node at (0,-0.5) (try) {try};
+            \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+        \end{scope}
+        \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm] (someexcept) at (try.center) {};
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->, looseness=0.5] (someexcept) to[out=0,in=90] (catch.north);
+        \draw[->] (0,0) -- (try.north);
+        \draw[white, ->] (try.north) -- (try.north |- someexcept.inner point 1);
+        \draw[white, ->] (catch.north) -- (catch.south);
+        \draw[->] (try.south |- catch.south) -- +(0,-0.25);
+        \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
+
+    \end{tikzpicture}
+\end{minipage}}
+
+\vspace{-2ex}
+\subsection{Stack Unwinding}
+\begin{itemize}
+    \item Baue solange Methoden-Frames vom Stack ab, bis Exception behandelt wird
+    \item Falls \lstinline{main()} mit Exception zurückkehrt, behandelt JVM Exception mit Programmabbruch
+\end{itemize}
+
+\subsection{Error vs. Exception}
+\vspace{-.9\abovedisplayskip}
+\begin{minipage}[t]{0.5\columnwidth}
+    \subsubsection{Error}
+    \raggedright%
+    \begin{itemize}
+        \item Schwerwiegende Fehler, die \textbf{nicht behandelt} werden sollen
+        \item Fehler in JVM: \lstinline{OutOfMemoryError}, \lstinline{StackOverflowError}
+        \item Programmierfehler: \lstinline{AssertionError}
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.49\columnwidth}
+    \subsubsection{Exception}
+    \raggedright%
+    \begin{itemize}
+        \item Laufzeitfehler, die \textbf{behandelbar} sind
+        \item Fehler in Eingabe, Parameter, Bedienung, \ldots z.B. \lstinline{IOException} \textrightarrow{} grundsätzlich behandeln
+        \item Andere Laufzeitfehler \textrightarrow{} lieber nicht behandeln
+    \end{itemize}
+\end{minipage}
+    
+\subsection{\textsf{\textbf{\textcolor{keywordcolour}{finally}}}-Ablauf}
+\vspace{-.9\abovedisplayskip}
+\begin{minipage}[t]{0.33\columnwidth}
+    \subsubsection{Normalfall}
+    \begin{tikzpicture}[every node/.style={draw, 
+        fill=bluecontrast, 
+        text=white, 
+        text width=1.6cm, 
+        minimum height=3mm,
+        inner sep=0mm, 
+        text depth=3mm,
+        text height=2mm,
+        align=flush left}, >={Stealth[length=1.25mm]}]
+        \node at (0,-0.5) (try) {try};
+        \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+        \node[fill=basegreen, anchor=north east, postaction={draw,thin}, line width=0mm] at ($(catch.south)!0.5!(catch.south west)$) (finally) {finally};
+        \draw[->] (0,0) -- (try.north);
+        \draw[white, ->] (try.north) -- (try.south);
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->] (try.south) -- (finally.north);
+        \draw[white, ->] (finally.north) -- (finally.south);
+        \draw[->] (finally.south) -- +(0,-0.25);
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}[t]{0.33\columnwidth}
+    \subsubsection{Behandelte Exception}
+    \begin{tikzpicture}[>={Stealth[length=1.25mm]}]
+        \begin{scope}[every node/.style={draw, 
+            fill=bluecontrast, 
+            text=white, 
+            text width=1.6cm, 
+            minimum height=3mm,
+            inner sep=0mm, 
+            text depth=3mm,
+            text height=2mm,
+            align=flush left}]
+            \node at (0,-0.5) (try) {try};
+            \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+            \node[fill=basegreen, anchor=north east, postaction={draw,thin}, line width=0mm] at ($(catch.south)!0.5!(catch.south west)$) (finally) {finally};
+        \end{scope}
+        \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm] (someexcept) at (try.center) {};
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->, looseness=0.5] (someexcept) to[out=0,in=90] (catch.north);
+        \draw[->] (0,0) -- (try.north);
+        \draw[white, ->] (try.north) -- (try.north |- someexcept.inner point 1);
+        \draw[white, ->] (catch.north) -- (catch.south);
+        \draw[white, ->] (finally.north) -- (finally.south);
+        \draw[->] (finally.south) -- +(0,-0.25);
+    \end{tikzpicture}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.33\columnwidth}
+    \subsubsection{Unbehandelte Exception}
+    \begin{tikzpicture}[>={Stealth[length=1.25mm]}]
+        \begin{scope}[every node/.style={draw, 
+            fill=bluecontrast, 
+            text=white, 
+            text width=1.6cm, 
+            minimum height=3mm,
+            inner sep=0mm, 
+            text depth=3mm,
+            text height=2mm,
+            align=flush left}]
+            \node at (0,-0.5) (try) {try};
+            \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+            \node[fill=basegreen, anchor=north east, postaction={draw,thin}, line width=0mm] at ($(catch.south)!0.5!(catch.south west)$) (finally) {finally};
+        \end{scope}
+        \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm] (someexcept) at (try.center) {};
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->] (someexcept) to[out=-150,in=150] (finally.north);
+        \draw[->] (0,0) -- (try.north);
+        \draw[white, ->] (try.north) -- (try.north |- someexcept.inner point 1);
+        \draw[white, ->] (finally.north) -- (finally.south);
+        \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm, yshift=-0.88mm] at (finally.south) {};
+    \end{tikzpicture}
+\end{minipage}
+\lstinline{finally}-Block wird immer ausgeführt, auch wenn \lstinline{catch}-Block eine Exception wirft.
+
+\vspace{1ex}
+\begin{minipage}[t]{0.6\columnwidth}
+    \subsection{try-with-resources}
+    \begin{itemize}
+        \item Objekte, die geschlossen werden müssen
+        \item \lstinline{AutoCloseable}-Interface
+    \end{itemize}
+    \lstinputlisting{snippets/excepttrywith.java}
+    \subsection{Benutzerdefinierte Exceptions}
+    \lstinputlisting{snippets/exceptcustom.java}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.39\columnwidth}
+    \subsection{Throwable}
+    \raggedright%
+    \begin{itemize}
+        \item Klasse oder Unterklasse von \lstinline{Throwable}
+        \item Klassifizierung des Fehlers
+    \end{itemize}
+    \begin{tikzpicture}[baseline=(current bounding box.north), 
+        every node/.style={
+            draw, 
+            fill=basegreen,
+            text=white,
+            minimum width=1.5cm,
+            minimum height=4.5mm,
+            align=center},
+        >={Stealth}]
+
+        \node[](throwable) at (0,0) {Throwable};
+        \node[below left=2mm and -6mm of throwable](error) {Error};
+        \node[below right=2mm and -6mm of throwable](exception) {Exception};
+        \node[below=3mm of exception] (runtime) {RuntimeException};
+        \draw[->] (error) -- (throwable);
+        \draw[->] (exception) -- (throwable);
+        \draw[->] (runtime) -- (exception);
+        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, -] (runtime.south) -- +(0,-2mm);  
+    \end{tikzpicture}
+\end{minipage}

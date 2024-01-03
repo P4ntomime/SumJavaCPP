@@ -1,0 +1,50 @@
+\section{Java Virtual Machine}
+\subsection{Java Runtime-Architektur}
+
+\begin{tikzpicture}[every node/.style={draw=black, minimum height=0.8cm}]
+    \node[minimum width=1.5cm] (srccode) {Quellcode};
+    \node[fill=basegreen, text=white, minimum width=2cm, below=0.5cm of srccode, rounded corners=0.2cm] (javac) {Java Compiler};
+    \node[minimum width=1.5cm, right=1cm of javac] (bytecode) {Bytecode};
+    \node[fill=basegreen, text=white, minimum width=2cm, above=0.5cm of bytecode, rounded corners=0.2cm] (jvm) {Java Virtual Machine};
+    \node[fill=redcontrast, text=white, minimum width=2cm, right=1.2cm of jvm, rounded corners=0.2cm] (os) {Reale Maschine};
+    \draw[-{Stealth}] (srccode) -- (javac);
+    \draw[-{Stealth}] (javac) to node[draw=none, above, minimum height=0.3cm] {erzeugt} (bytecode);
+    \draw[-{Stealth}] (bytecode) to node[draw=none, right, minimum height=0.3cm] {läuft auf} (jvm);
+    \draw[-{Stealth}] (jvm) to node[draw=none, above, minimum height=0.3cm] {läuft auf} (os);
+\end{tikzpicture}
+
+\subsection{Bytecode}
+\begin{minipage}{0.25\columnwidth}
+    \lstinputlisting[style=basestyle, escapechar=!]{snippets/bytecode.java}
+\end{minipage}\hfill
+\begin{minipage}{0.71\columnwidth}
+    \begin{tikzpicture}[every node/.style={draw=none, align=flush left, text width=2.1cm, minimum height=0.1cm}]
+        \node[text=claretcontrast] (0) {\texttt{BIPUSH 12}\\\vspace{-1mm}\texttt{ISTORE 1}};
+        \node[right=0cm of 0, text=claretcontrast, text width=4cm] {Wert 12 auf Stack legen\\Wert von Stack an Index 1 speichern};
+
+        \node[below=0.1cm of 0, text=basegreen] (1) {\texttt{ICONST\_1}\\\vspace{-1mm}\texttt{ISTORE 2}};
+        \node[right=0cm of 1, text=basegreen, text width=4cm] {Wert 11 auf Stack legen\\Wert von Stack an Index 2 speichern};
+
+        \node[below=0.1cm of 1, text=redcontrast] (2) {\texttt{ICONST\_1}\\\vspace{-1mm}\texttt{ISTORE 3}};
+        \node[right=0cm of 2, text=redcontrast, text width=4cm] {Wert 1 auf Stack legen\\Wert von Stack an Index 3 speichern};
+        
+        \node[below=0.1cm of 2, text=coralcontrast] (3) {\texttt{ILOAD 3}\\\vspace{-1mm}\texttt{ILOAD 1}};
+        \node[below=-1mm of 3, text=coralcontrast] (3a) {\texttt{IF\_ICMPLE L4}};
+        \node[right=0cm of 3a, text=coralcontrast, text width=4cm] (3acomment) {Wenn 3 > 1};
+        \node[above=-2mm of 3acomment, text=coralcontrast, text width=4cm] (3b) {Wert Index 3 auf Stack legen\\Wert Index 1 auf Stack legen};
+        \node[below=-1mm of 3a, text=lightgray] (4) {\texttt{//\ldots}};
+    \end{tikzpicture}
+\end{minipage}
+
+\subsubsection{Java Bytecode}
+\begin{itemize}
+    \item Standardisierte Zwischensprache
+    \item Für hypotethische Stack-Maschine
+\end{itemize}
+
+\subsubsection{Java Virtual Machine}
+\begin{itemize}
+    \item Interpretiert Bytecode
+    \item Implementiert für jede Zielplattform
+    \item Just-In-Time (JIT) Compiler in realen Maschinencode
+\end{itemize}

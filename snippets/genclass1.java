@@ -1,0 +1,3 @@
+class Stack!\aftergroup\bluelst \tikz[overlay, remember picture]\node(tp1){};!<T>!\tikz[overlay, remember picture]\node(tp2){}; \aftergroup\endlstcol! {
+    //...
+}

@@ -1,0 +1,38 @@
+\section{ArrayList}
+\subsection{Eigenschaften}
+\begin{itemize}
+    \item ArrayList enthält Referenzen auf Objekte
+    \item Kann dynamisch vergrössert/verkleinert werden
+    \item Kann nicht direkt mit primitiven Datentypen (\lstinline{int}, \lstinline{float}, etc.) verwendet werden
+\end{itemize}
+
+\subsection{Syntax}
+\mylstbox{var stringList = new ArrayList<String>();}
+
+\subsection{Wrapping}
+Um einen Primitiven Datentyp zu referenzieren, muss dieser zuerst in ein Objekt gewrappt werden.
+Boxing/Unboxing implizit möglich.
+\vspace{-0.8\abovedisplayskip}
+\begin{center}
+    \begin{tabularx}{0.45\columnwidth}{@{}l l@{}}
+        \textbf{Primitiver Typ} & \textbf{Wrapper-Klasse}\\\hhline{==}
+        \lstinline{boolean} & \lstinline{Boolean}\\\hhline{--}
+        \lstinline{char} & \lstinline{Character}\\\hhline{--}
+        \lstinline{byte} & \lstinline{Byte}\\\hhline{--}
+        \lstinline{short} & \lstinline{Short}\\
+    \end{tabularx}
+    \begin{tabularx}{0.45\columnwidth}{@{}l l@{}}
+        \textbf{Primitiver Typ} & \textbf{Wrapper-Klasse}\\\hhline{==}
+        \lstinline{int} & \lstinline{Integer}\\\hhline{--}
+        \lstinline{long} & \lstinline{Long}\\\hhline{--}
+        \lstinline{float} & \lstinline{Float}\\\hhline{--}
+        \lstinline{double} & \lstinline{Double}\\
+    \end{tabularx}
+\end{center}
+    
+\subsection{Weitere Collections}
+\begin{tabular}{@{}l l@{}}
+    \lstinline!List! &Folge von Elementen\\
+    \lstinline!Set! &Menge von Elementen\\
+    \lstinline!Map! &Abbildung von Schlüssel auf Wert
+\end{tabular}

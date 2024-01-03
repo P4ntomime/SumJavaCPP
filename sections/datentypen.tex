@@ -1,0 +1,107 @@
+\section{Datentypen}
+\subsection{Primitive Datentypen}
+\begin{itemize}
+    \item Im Gegensatz zu C++ sind Wertebereiche auf jeder Plattform gleich
+    \item Keine \texttt{unsigned} Typen
+\end{itemize}
+
+\begin{center}
+    \begin{tabularx}{0.82\columnwidth}{@{}c l l@{}}
+        \lstinline{boolean}    & Boolscher Wert        & true, false\\\hline
+        \lstinline{char}       & Textzeichen (UTF16)   & 'a', 'b', 'c'\\\hline
+        \lstinline{byte}       & Ganzzahl (8 Bit)             & -128 bis 127\\\hline
+        \lstinline{short}      & Ganzzahl (16 Bit)             & -32'768 bis 32'767\\\hline
+        \lstinline{int}        & Ganzzahl (32 Bit)             & -2^{31} bis 2^{31}-1\\\hline
+        \lstinline{long}       & Ganzzahl (64 Bit)             & -2^{63} bis 2^{63}-1, 1L (L Suffix)\\\hline
+        \lstinline{float}      & Gleitkommazahl (32 Bit)       & 0.1f, 2e4f (2*10^4)\\\hline
+        \lstinline{double}     & Gleitkommazahl (64 Bit)       & 0.1, 2e4 (2*10^4)\\
+    \end{tabularx}
+\end{center}
+
+\subsection{Typumwandlung}
+\begin{minipage}{0.6\columnwidth}
+    \begin{tikzpicture}[every node/.style={draw=none}]
+        \node (double) {\strut\lstinline{double}};
+        \node[right=0.1cm of double] (float) {\strut\lstinline{float}};
+        \node[right=0.1cm of float] (long) {\strut\lstinline{long}};
+        \node[right=0.1cm of long] (int) {\strut\lstinline{int}};
+        \node[right=0.1cm of int] (short) {\strut\lstinline{short}};
+        \node[right=0.1cm of short] (byte) {\strut\lstinline{byte}};
+        \draw[-{Stealth}, very thick] (double.south) to node[below] {\textbf{Explizit} mit Cast} (byte.south);
+        \draw[-{Stealth}, very thick] (byte.north) to node[above] {\textbf{Implizit}} (double.north);
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.35\columnwidth}
+    Boolean kann nicht implizit in andere Typen umgewandelt werden.
+\end{minipage}
+
+\subsubsection{Explizite Typumwandlung}
+Beispiel: \mylstbox{int i = (int) 3.14;}\hfill\newline
+Informationsverlust:
+\begin{itemize}
+    \item Ganzzahl \textrightarrow{} Ganzzahl: Nur untere Bits werden übernommen
+    \item Gleitkommazahl \textrightarrow{} Ganzzahl: Nachkommastellen werden abgeschnitten
+\end{itemize}
+
+\subsection{Arrays}
+\begin{itemize}
+    \item Speichern Referenzen auf gleichartige Objekte
+    \item Zugriff über Index
+\end{itemize}
+Beispiel: \mylstbox{int[] a = new int[5];} \tikz[remember picture, overlay, x=5mm, y=5mm]{
+    \foreach\x in {0,1,...,4}{
+        \node[draw,fill=basegreen, text=white, minimum width=5mm] at ($(\x,0) + (6,0.25)$) (a) {0};
+        \node[draw=none, above=0mm of a] {\sffamily\normalsize a[\x]};}}\hfill\null\\
+Wenn Arrays vergrössert werden, wird deren Inhalt in einen neuen, grösseren Speicherbereich kopiert.
+
+\subsubsection{Mehrdimensionale Arrays}
+Beispiel: \mylstbox{int&&[]&&@[]@ m = new int&&[2]&&@[3]@;}\tikz[baseline=1ex, remember picture, overlay, x=5mm, y=3.75mm]{
+    \foreach\x in {0,1,2}{
+        \node[draw=none] at ($(\x,-1) + (7,0)$) (a) {\clt{\x}};
+        \foreach\y in {0,1}{
+            \ifthenelse{\x=0}{\node[draw=none] at ($(0,{1-\y}) + (6,0)$) (a) {\cor{\y}};}{}%
+            \node[draw,fill=basegreen, text=white, minimum width=5mm] at ($(\x,\y) + (7,0)$) (a) {0};}}
+    \node[draw=none, anchor=east] at (5.75,0.5) {\cor{Erster Index}};
+    \node[draw=none, anchor=north] at (8, -1.25) {\clt{Zweiter Index}};
+    }\vspace{2mm}\newline
+\mylstbox{m.length} \textrightarrow{} 2 \qquad \mylstbox{m[0].length} \textrightarrow{} 3
+\vspace{3mm}
+
+\subsection{Einordnung}
+\begin{center}
+    \begin{tikzpicture}[>={Stealth}, every node/.style={inner sep=0.5mm,text depth=0}]
+        \node (dt) at (0,0) {Datentyp};
+        \node (wt) at (-1.5,-0.5) {Werte-Typ};
+        \node (rt) at (2.5,-0.5) {Referenz-Typ};
+        \node (kl) at (1,-1) {Klasse};
+        \node (in) at (2,-1) {Interface};
+        \node (ar) at (3,-1) {\color{claretcontrast}Array};
+        \node (en) at (4,-1) {Enum};
+        \node (pt) at (-1.5,-1) {\color{redcontrast}Primitiver Typ};
+        \node (bo) at (-2.5,-1.5) {\color{basegreen}boolean};
+        \node (ch) at (-1.5,-1.5) {\color{basegreen}char};
+        \node (nt) at (0.5,-1.5) {\color{redcontrast}numerischer Basis-Typ};
+        \node (gz) at (-0.5,-2) {\color{redcontrast}Ganzzahl};
+        \node (glz) at (1.5,-2) {\color{redcontrast}Gleitkommazahl};
+        \renewcommand{\arraystretch}{1.2}
+        \node[below=-0.8mm of gz, align=flush left, minimum width=2cm] {\begingroup\color{basegreen}\renewcommand{\arraystretch}{1}\begin{tabular}{@{}l l@{}}- byte &- short\\- int&- long\end{tabular}\endgroup};
+        \node[below=0mm of glz, align=flush left, minimum width=2cm] {\color{basegreen}- float\\\color{basegreen}- double};
+        \draw (dt) -- (wt);
+        \draw (dt) -- (rt);
+        
+        \draw (wt) -- (pt);
+        
+        \draw (rt) -- (kl);
+        \draw (rt) -- (in);
+        \draw (rt) -- (ar);
+        \draw (rt) -- (en);
+        
+        \draw (pt) -- (bo);
+        \draw (pt) -- (ch);
+        \draw (pt) -- (nt);
+        
+        \draw (nt) -- (gz);
+        \draw (nt) -- (glz);
+        
+    \end{tikzpicture}
+\end{center}\vspace{-\belowdisplayskip}
