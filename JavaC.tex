@@ -1,50 +1,30 @@
 \documentclass[8pt,landscape,a4paper,twoside]{extarticle}
-\usepackage{blindtext}
-\usepackage{bigints}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{times}
 \usepackage{multicol}
-\usepackage{multirow}
-\usepackage[top=3mm,bottom=6mm,left=2mm,right=3mm]{geometry}
-\usepackage{wrapfig}
-\usepackage{microtype}
-\usepackage[framemethod=tikz]{mdframed}
+\usepackage[left=3mm, right=3mm, top=3mm, bottom=3mm, headheight=0mm, headsep=0mm, footskip=3mm, includefoot]{geometry}
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{scalerel}
 \usepackage{xcolor}
-\usepackage{colortbl}
-\usepackage{dirtytalk}
 \usepackage{tabularx}
 \usepackage{hhline}
-\usepackage{tabu}
 \usepackage{tikz}
 \usepackage{listings}   % to use nodes inside listing see: https://texample.net/tikz/examples/tikz-listings/ 
-\usepackage[hidelinks,
-            % set pdf metadata
-            pdfauthor={Laurin Heitzer},
-            pdftitle={JavaC},
-            pdfsubject={Java für C++ Programmierer HS23},
-            pdfkeywords={Gahn go lerne!!}]{hyperref}
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{tikz-uml}   % for this to work, download tikz-uml.sty from https://perso.ensta-paris.fr/~kielbasi/tikzuml/index.php?lang=en to 'texlive/texmf-local/tex/latex/local' and run 'texhash' in ps terminal (windows)
-\usepackage{realboxes}
+\usepackage{hyperref}
 \usepackage{tcolorbox}
-\usepackage{textcomp}
-\usepackage{pifont}
 \usepackage{anyfontsize}
 \usepackage{ifthen}
-\usepackage{hhline}
 \usepackage{calc}
 \usepackage{draftwatermark}
 \usepackage{contour}
 \usepackage[normalem]{ulem}
-\usepackage{scrlayer-scrpage}
+\usepackage{fancyhdr}
 \usepackage[explicit]{titlesec}
 \usepackage{qrcode}
+
 
 
 % tikz libraries
@@ -61,16 +41,25 @@
 \setlength{\columnsep}{1.5mm}       % column separation
 \setlength{\columnseprule}{0.1pt}   % thickness of column separation line
 
-\title{Java für C++ Programmierer}
-\def\semester{HS23}
+% set document info
+\def\title{Java für C++ Programmierer}
 \def\dozent{Frieder Loch}
-\author{Laurin Heitzer}
+\def\semester{HS23}
+\def\author{Laurin Heitzer}
+\def\repo{https://github.com/P4ntomime/SumJavaCPP}
+
+\hypersetup{hidelinks,
+% set pdf metadata
+pdfauthor={\author},
+pdftitle={JavaC},
+pdfsubject={\title{} \semester{}},
+pdfkeywords={Gahn go lerne!!}}
 
 \setcounter{secnumdepth}{0}        % no section numbering, remove if section numbering is needed
 
 %% colors
 \definecolor{mygray}{cmyk}{0,0,0,.75}
-\definecolor{Gray}{gray}{0.85}
+% \definecolor{Gray}{gray}{0.85}
 \definecolor{sectioncolor}{HTML}{368d3f}
 
 % color palette: https://colorkit.co/color-palette-generator/FF8552-9e22bd-404E7C-C32E15-225A28/
@@ -98,9 +87,6 @@
 \catcode`^=\active% chktex 41
 \newcommand_[1]{\ensuremath{\sb{\mathrm{\scaleobj{0.7}{#1}}}}}
 \newcommand^[1]{\ensuremath{\sp{\mathrm{\scaleobj{0.7}{#1}}}}}
-
-% new column types for tabularx
-\newcolumntype{a}{>{\columncolor{Gray}}l}
 
 % inline tikz node for later referencing
 \newcommand{\tikznode}[2]{% from https://tex.stackexchange.com/a/402466/121799
@@ -156,14 +142,8 @@
 \newcommand{\cor}[1]{{\color{coralcontrast}#1}}
 \newcommand{\clt}[1]{{\color{claretcontrast}#1}}
 
-% custom math commands
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\real}{\mathbb{R}}
-\newcommand{\limes}[1]{\underset{#1}{\lim}}
-\newcommand{\ond}{\operatorname{d}}
-
+% bullet command for items in tables
 \newcommand\sbullet[1][.6]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
-
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
 
 % custom inline listings with box around them
@@ -174,9 +154,7 @@
   \node[fit= (current bounding box),inner ysep=#1,inner xsep=0]{};
 }
 
-\def\input@path{{./sections/}{./images/}{./tikz/}}
-\graphicspath{{./images/}}
-
+% stretch table rows
 \renewcommand{\arraystretch}{1.2}
 
 % custom underline command for exclusions on lowercase letters such as g, j, p, q, y
@@ -188,29 +166,12 @@
 }
 
 % define page numbering style (bottom right on odd pages, bottom left on even pages)
-\clearpairofpagestyles%
-\DeclareNewLayer[
-    foreground,
-    oddpage,
-    align=br,
-    hoffset=\paperwidth,
-    voffset=\paperheight,
-    width=2.5em,
-    height=1.1\baselineskip,
-    contents={{%
-    \setlength{\fboxsep}{0pt}%
-    \colorbox{basegreen}{\parbox[c][\layerheight][c]{\layerwidth}{\centering\pagemark}}%
-    }}
-]{pagenumberouterbottom.odd}
-\DeclareNewLayer[
-    clone=pagenumberouterbottom.odd,
-    evenpage,
-    align=bl,
-    hoffset=0pt
-]{pagenumberouterbottom.even}
-\addtokomafont{pagenumber}{\color{white}\bfseries}
-\AddLayersToPageStyle{scrheadings}{pagenumberouterbottom.odd,pagenumberouterbottom.even}
-\AddLayersToPageStyle{plain}{pagenumberouterbottom.odd,pagenumberouterbottom.even}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[LE,RO]{\tikz{\node[fill=basegreen, node font=\bfseries, text=white, minimum width=6mm, minimum height=3mm, inner sep=0mm, align=center]{\thepage};}}
+
 
 % custom title formats
 \titleformat{\section}
@@ -326,9 +287,7 @@
     moredelim=[is][\textcolor{claretcontrast}]{@}{@},
 }
 
-
 \begin{document}
-
 	\begin{multicols*}{3}
 		\input{sections/title}
         \input{sections/jvm.tex}

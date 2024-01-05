@@ -10,7 +10,15 @@
     \lstinputlisting{snippets/streamapiex.java}
 \end{minipage}\hfill%
 \begin{minipage}[t]{0.39\columnwidth}
+    \begingroup
+    % change \section command temporarily to be centered
+    \titleformat{\subsection}
+            {\fontsize{9}{8}\selectfont\bfseries\filcenter}
+            {\thesubsection}
+            {0mm}
+            {\phantomsection\myul{#1}} % \phantomsection to make hyperref link to correct section
     \subsection{Idee}
+    \endgroup
     \begin{center}
         \begin{tikzpicture}[every node/.style={
             draw, 
@@ -42,6 +50,7 @@
 \end{tabular}
 
 \subsection{Unendliche Quellen}
+\vspace{-0.7\baselineskip}
 \begin{minipage}[t]{0.5\columnwidth}
     \subsubsection{\textsf{generate()}}
     \lstinputlisting{snippets/streamgenerate.java}
@@ -54,7 +63,7 @@
 \subsection{Zwischenoperationen}
 \begin{minipage}[t]{\columnwidth}
     \raggedright%
-    Bei Collections ist es \textbf{nicht} erlaubt, diese zu ändern mit Zwischenoperationen. Auch nicht erlaubt, sind Abhängigkeiten zu äusseren, änderbaren Variablen.
+    Bei Collections ist es \textbf{nicht} erlaubt, diese mit Zwischenoperationen zu ändern. Auch nicht erlaubt sind Abhängigkeiten zu äusseren, änderbaren Variablen.
 \end{minipage}
 \begin{tabular}{@{\hspace{1.3mm}}l@{\hspace{1mm}}l@{}}
     \tabitem\mylstbox{filter(Predicate)}: &Filtern mit Predicate-Funktionsobjekt/Lambda\\
@@ -65,6 +74,7 @@
     \tabitem\mylstbox{limit(long n)}: &n-Elemente liefern\\
     \tabitem\mylstbox{skip(long n)}: &n-Elemente überspringen
 \end{tabular}
+\vfill\null%
 
 \subsection{Terminaloperationen}
 \begin{tabular}{@{\hspace{1.3mm}}l@{\hspace{1mm}}l@{}}
@@ -93,7 +103,7 @@
 
 \subsection{Lazy Evaluation}
 \begin{itemize}
-    \item Element wird erst bereitgestellt, wenn Nahcfolger Element anfordert
+    \item Element wird erst bereitgestellt, wenn Nachfolger Element anfordert
     \item Unendliche Streams sind meist Lazy
 \end{itemize}
 
