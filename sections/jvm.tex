@@ -1,16 +1,33 @@
 \section{Java Virtual Machine}
 \subsection{Java Runtime-Architektur}
 
-\begin{tikzpicture}[every node/.style={draw=black, minimum height=0.8cm}]
-    \node[minimum width=1.5cm] (srccode) {Quellcode};
-    \node[fill=basegreen, text=white, minimum width=2cm, below=0.5cm of srccode, rounded corners=0.2cm] (javac) {Java Compiler};
-    \node[minimum width=1.5cm, right=1cm of javac] (bytecode) {Bytecode};
-    \node[fill=basegreen, text=white, minimum width=2cm, above=0.5cm of bytecode, rounded corners=0.2cm] (jvm) {Java Virtual Machine};
-    \node[fill=redcontrast, text=white, minimum width=2cm, right=1.2cm of jvm, rounded corners=0.2cm] (os) {Reale Maschine};
-    \draw[-{Stealth}] (srccode) -- (javac);
-    \draw[-{Stealth}] (javac) to node[draw=none, above, minimum height=0.3cm] {erzeugt} (bytecode);
-    \draw[-{Stealth}] (bytecode) to node[draw=none, right, minimum height=0.3cm] {läuft auf} (jvm);
-    \draw[-{Stealth}] (jvm) to node[draw=none, above, minimum height=0.3cm] {läuft auf} (os);
+\begin{tikzpicture}[
+    every node/.style={
+        draw=black, 
+        minimum height=0.8cm,
+        minimum width=1.15cm,
+        text width=1.15cm,
+        align=center},
+    >=Stealth]
+    \node (srccode) {Quellcode};
+    \node[fill=basegreen, text=white, right=0.4cm of srccode, rounded corners=0.2cm] (javac) {Java Compiler};
+    \node[right=0.9cm of javac] (bytecode) {Bytecode};
+    \node[fill=basegreen, text=white, right=0.55cm of bytecode, rounded corners=0.2cm] (jvm) {Java Virtual Machine};
+    \node[fill=redcontrast, text=white, right=0.55cm of jvm, rounded corners=0.2cm] (os) {Reale Maschine};
+
+    \begin{scope}[
+        every node/.style={
+            draw=none, 
+            minimum height=0.3cm, 
+            minimum width=0.3cm, 
+            align=center, 
+            text width=0.9cm,
+            font=\small}]
+        \draw[->] (srccode) -- (javac);
+        \draw[->] (javac.east) to node[midway, above] {erzeugt} (bytecode.west);
+        \draw[->] (bytecode) to node[midway, above] {läuft\\ auf} (jvm);
+        \draw[->] (jvm) to node[midway, above] {läuft\\ auf} (os);
+    \end{scope}
 \end{tikzpicture}
 
 \subsection{Bytecode}
