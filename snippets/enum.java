@@ -1,9 +1,8 @@
 public enum Weekday {
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY;
+    MON, TUE, WED, THU,
+    FRI, SAT, SUN;
+    public boolean isWeekend() {
+        return (this == SAT || 
+                    this == SUN);
+    }
 }

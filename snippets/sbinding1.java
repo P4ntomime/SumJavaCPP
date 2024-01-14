@@ -1,12 +1,12 @@
 public class Vehicle {
     //...
     public static void test() {
-        System.out.println("I'm a vehicle!");
+        System.out.println("Vehicle");
     }
 }
 public class Car extends Vehicle {
     //...
     public static void test() {
-        System.out.println("I'm a car!");
+        System.out.println("Car");
     }
 }

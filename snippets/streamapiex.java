@@ -1,4 +1,4 @@
-People
+people
     .stream()
     .filter(p -> p.getAge() >= 18)
     .map(p -> p.getName())

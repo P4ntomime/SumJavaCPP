@@ -4,7 +4,7 @@
     \item Im Gegensatz zu C++ sind Wertebereiche auf jeder Plattform gleich
     \item Keine \texttt{unsigned} Typen
 \end{itemize}
-
+\vspace{-0.8\abovedisplayskip}
 \begin{center}
     \begin{tabularx}{0.82\columnwidth}{@{}c l l@{}}
         \lstinline{boolean}    & Boolscher Wert        & true, false\\\hline
@@ -17,6 +17,7 @@
         \lstinline{double}     & Gleitkommazahl (64 Bit)       & 0.1, 2e4 (2*10^4)\\
     \end{tabularx}
 \end{center}
+\vspace{-0.8\belowdisplayskip}
 
 \subsection{Typumwandlung}
 \begin{minipage}{0.6\columnwidth}
@@ -32,22 +33,33 @@
     \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.35\columnwidth}
-    Boolean kann nicht implizit in andere Typen umgewandelt werden.
+    \lstinline{boolean} kann nicht implizit in andere Typen umgewandelt werden.
 \end{minipage}
 
-\subsubsection{Explizite Typumwandlung}
-Beispiel: \mylstbox{int i = (int) 3.14;}\hfill\newline
-Informationsverlust:
-\begin{itemize}
-    \item Ganzzahl \textrightarrow{} Ganzzahl: Nur untere Bits werden übernommen
-    \item Gleitkommazahl \textrightarrow{} Ganzzahl: Nachkommastellen werden abgeschnitten
-\end{itemize}
+
+\begin{minipage}[t]{0.22\columnwidth}
+    \subsubsection{Explizit}
+    \raggedright%
+    Beispiel: 
+    
+    \mylstbox{int i = (int)3.14;}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.77\columnwidth}
+    \raggedright%
+    \vspace{0.2ex}
+    Informationsverlust:
+    \begin{itemize}
+        \item Ganzzahl \textrightarrow{} Ganzzahl: Nur untere Bits werden übernommen
+        \item Gleitkommazahl \textrightarrow{} Ganzzahl: Nachkommastellen werden abgeschnitten
+    \end{itemize}
+\end{minipage}
 
 \subsection{Arrays}
 \begin{itemize}
     \item Speichern Referenzen auf gleichartige Objekte
     \item Zugriff über Index
 \end{itemize}
+
 Beispiel: \mylstbox{int[] a = new int[5];} \tikz[remember picture, overlay, x=5mm, y=5mm]{
     \foreach\x in {0,1,...,4}{
         \node[draw,fill=basegreen, text=white, minimum width=5mm] at ($(\x,0) + (6,0.25)$) (a) {0};

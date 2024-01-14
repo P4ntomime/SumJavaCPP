@@ -40,7 +40,7 @@
         \node[right=0cm of 0, text=claretcontrast, text width=4.2cm] {Wert 12 auf Stack legen\\Wert von Stack an Index 1 speichern};
 
         \node[below=0.1cm of 0, text=basegreen] (1) {\texttt{ICONST\_1}\\\vspace{-1mm}\texttt{ISTORE 2}};
-        \node[right=0cm of 1, text=basegreen, text width=4.2cm] {Wert 11 auf Stack legen\\Wert von Stack an Index 2 speichern};
+        \node[right=0cm of 1, text=basegreen, text width=4.2cm] {Wert 1 auf Stack legen\\Wert von Stack an Index 2 speichern};
 
         \node[below=0.1cm of 1, text=redcontrast] (2) {\texttt{ICONST\_1}\\\vspace{-1mm}\texttt{ISTORE 3}};
         \node[right=0cm of 2, text=redcontrast, text width=4.2cm] {Wert 1 auf Stack legen\\Wert von Stack an Index 3 speichern};
@@ -53,15 +53,21 @@
     \end{tikzpicture}
 \end{minipage}
 
-\subsubsection{Java Bytecode}
-\begin{itemize}
-    \item Standardisierte Zwischensprache
-    \item Für hypothetische Stack-Maschine
-\end{itemize}
 
-\subsubsection{Java Virtual Machine}
-\begin{itemize}
-    \item Interpretiert Bytecode
-    \item Implementiert für jede Zielplattform
-    \item Just-In-Time (JIT) Compiler in realen Maschinencode
-\end{itemize}
+\begin{minipage}[t]{0.36\columnwidth}
+    \subsubsection{Java Bytecode}
+    \raggedright%
+    \begin{itemize}
+        \item Standardisierte Zwischensprache
+        \item Für hypot. Stackmaschine
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.63\columnwidth}
+    \subsubsection{Java Virtual Machine}
+    \raggedright%
+    \begin{itemize}
+        \item Interpretiert Bytecode
+        \item Implementiert für jede Zielplattform
+        \item \textbf{J}ust-\textbf{I}n-\textbf{T}ime Compiler in realen Maschinencode
+    \end{itemize}
+\end{minipage}

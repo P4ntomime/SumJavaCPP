@@ -1,14 +1,14 @@
-\section{Schnittstellen}
+\section{Schnittstellen (Interfaces)}
 
 
 \subsection{Syntax}
 \begin{minipage}[t]{0.51\columnwidth}
     \raggedright%
     \begin{itemize}
-        \item Implizit \lstinline{public} und \lstinline{abstract}. (Andere Modifikatoren nicht erlaubt)
+        \item Implizit \lstinline{public} und \lstinline{abstract}. (Andere Modifikatoren \textbf{nicht} erlaubt)
         \item Alle Methoden müssen von der implementierenden Klasse implementiert werden, sofern diese nicht \lstinline{abstract} ist.
-        \item Methoden dürfen keine Implementierung im Interface haben.
-        \item Interfaces können nicht instanziiert werden.
+        \item Methoden dürfen \textbf{keine} Implementierung im Interface haben.
+        \item Interfaces können \textbf{nicht} instanziiert werden.
         \item Eine Implementierung kann mehrer Interfaces implementieren.
         \item Falls mehrere Methoden mit gleichem Namen existieren, wird nur eine Methode implementiert.
         \item Konstanten werden automatisch als \lstinline{public static final} deklariert.
@@ -33,10 +33,10 @@ Mittels loser Kopplung können mehrere Teams einfach miteinander arbeiten.
 Die Teams müssen sich nur auf die Schnittstelle einigen. 
 Die Implementierung kann unabhängig voneinander erfolgen.
 
-\begin{minipage}[t]{0.52\columnwidth}
+\begin{minipage}[t]{0.54\columnwidth}
     \subsection{Abstrakte Klassen}
     Klasse, die nicht instanziiert werden kann und mindestens eine abstrakte Methode enthält.
-\end{minipage}\hfill
+\end{minipage}\hfill%
 \begin{minipage}[t]{0.45\columnwidth}
     \subsection{Abstrakte Methoden}
     Deklaration einer Methode ohne Implementierung. Geht nur in abstrakten Klassen und Interfaces.
@@ -85,7 +85,7 @@ Menge von Elementen ohne Duplikate.
 \begin{minipage}[t]{0.69\columnwidth}
     \subsubsection{Beispiel}
     \phantom{t}\vspace{-3mm}
-    \lstinputlisting[inputencoding=cp1252]{snippets/map.java} % map.java needs to be saved with Windows 1252 (cp1252) encoding!
+    \lstinputlisting[morekeywords={Integer}, inputencoding=cp1252]{snippets/map.java} % map.java needs to be saved with Windows 1252 (cp1252) encoding!
 \end{minipage}
 
 \subsection{Comparator-Interface}
