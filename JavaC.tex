@@ -223,6 +223,13 @@ pdfkeywords={Gahn go lerne!!}}
 
 \limitpages{6}  % set page limit to 6 pages
 
+
+% hack to fix asterisk in lstlisting
+\lst@CCPutMacro%
+    \lst@ProcessOther{"2A}{%
+         {\raisebox{0.125pt}{*}}}
+    \@empty\z@\@empty%
+
 \makeatother
 
 % listings style (code)
@@ -286,6 +293,7 @@ pdfkeywords={Gahn go lerne!!}}
     moredelim=[is][\textcolor{coralcontrast}]{&&}{&&},
     moredelim=[is][\textcolor{claretcontrast}]{@}{@},
 }
+
 
 \begin{document}
 	\begin{multicols*}{3}
