@@ -1,14 +1,21 @@
 \section{Exceptions}
 
 % TODO: add some more examples for checked and unchecked exceptions
-\begin{minipage}[t]{0.6\columnwidth}
+\begin{minipage}[t]{0.43\columnwidth}
     \subsection{Checked Exceptions}
     \raggedright%
-    Bei Methodendeklaration müssen Exceptions angegeben werden, welche gechecked werden müssen.
-    \lstinputlisting{snippets/exceptchecked.java}
-    Es können nach \lstinline{throws} auch mehrere Exceptions mit Komma separiert angegeben werden.
+    \begin{itemize}
+        \item Bei Methodendeklaration müssen Exceptions angegeben werden, welche gechecked werden müssen.
+    \end{itemize}
 \end{minipage}\hfill%
-\begin{minipage}[t]{0.4\columnwidth}
+\begin{minipage}[t]{0.56\columnwidth}
+    \lstinputlisting{snippets/exceptchecked.java}
+\end{minipage}
+\begin{itemize}
+    \item Nach \lstinline{throws} können mehrere Exceptions mit "\lstinline{,}" separiert angegeben werden.
+\end{itemize}
+\vspace{-0.4\abovedisplayskip}
+\begin{minipage}[t]{0.44\columnwidth}
     \subsection{Unchecked Exceptions}
     \raggedright%
     \begin{itemize}
@@ -16,66 +23,73 @@
         \item \lstinline{RuntimeException} und \lstinline{Error} sowie Subklassen
         \item Behebung nur durch Änderung des Codes
     \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.55\columnwidth}
+    \lstinputlisting{snippets/exceptunchecked.java}
 \end{minipage}
 
-\vspace{-1.3cm}
-\begin{minipage}[t]{0.65\columnwidth}
+\vspace{0.3\abovedisplayskip}
+\begin{minipage}[t]{0.59\columnwidth}
     \subsection{Exceptions behandeln}
-    Exceptions werden mit \lstinline{try-catch}-Blöcken behandelt.
+    Werden mit \lstinline{try-catch}-Blöcken behandelt.
     \lstinputlisting{snippets/exceptcatch.java}
 \end{minipage}\hfill%
-\raisebox{1.4cm}{\begin{minipage}[t]{0.325\columnwidth}
+\begin{minipage}[t]{0.4\columnwidth}
     \subsection{Ablauf}
-    \subsubsection{Normalfall}
-    \begin{tikzpicture}[every node/.style={draw, 
-        fill=bluecontrast, 
-        text=white, 
-        text width=1.4cm, 
-        minimum height=3mm,
-        inner sep=0mm, 
-        text depth=3mm,
-        text height=2mm,
-        align=flush left}, >={Stealth[length=1.25mm]}]
-        \node at (0,-0.5) (try) {try};
-        \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
-        \draw[->] (0,0) -- (try.north);
-        \draw[white, ->] (try.north) -- (try.south);
-        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->] (try.south) -- (try.south |- catch.south);
-        \draw[->] (try.south |- catch.south) -- +(0,-0.25);
-        \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
-    \end{tikzpicture}
-
-    \subsubsection{Ausnahmefall}
-    \begin{tikzpicture}[>={Stealth[length=1.25mm]}]
-        \begin{scope}[every node/.style={draw, 
+    \begin{minipage}[t]{0.49\columnwidth}
+        \subsubsection{Normalfall}
+        \begin{tikzpicture}[every node/.style={draw, 
             fill=bluecontrast, 
             text=white, 
-            text width=1.4cm, 
+            text width=1cm, 
             minimum height=3mm,
             inner sep=0mm, 
             text depth=3mm,
             text height=2mm,
-            align=flush left}]
+            align=flush left}, >={Stealth[length=1.25mm]}]
             \node at (0,-0.5) (try) {try};
             \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
-        \end{scope}
-        \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm] (someexcept) at (try.center) {};
-        \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->, looseness=0.5] (someexcept) to[out=0,in=90] (catch.north);
-        \draw[->] (0,0) -- (try.north);
-        \draw[white, ->] (try.north) -- (try.north |- someexcept.inner point 1);
-        \draw[white, ->] (catch.north) -- (catch.south);
-        \draw[->] (try.south |- catch.south) -- +(0,-0.25);
-        \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
+            \draw[->] (0,0) -- (try.north);
+            \draw[white, ->] (try.north) -- (try.south);
+            \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->] (try.south) -- (try.south |- catch.south);
+            \draw[->] (try.south |- catch.south) -- +(0,-0.25);
+            \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
+        \end{tikzpicture}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.49\columnwidth}
+        \subsubsection{Ausnahmefall}
+        \begin{tikzpicture}[>={Stealth[length=1.25mm]}]
+            \begin{scope}[every node/.style={draw, 
+                fill=bluecontrast, 
+                text=white, 
+                text width=1cm, 
+                minimum height=3mm,
+                inner sep=0mm, 
+                text depth=3mm,
+                text height=2mm,
+                align=flush left}]
+                \node at (0,-0.5) (try) {try};
+                \node[fill=redcontrast,anchor=north west, postaction={draw,thin}, line width=0mm] at ($(try.south)!0.5!(try.south east)$) (catch) {catch};
+            \end{scope}
+            \node[fill=claretcontrast, star, star point height=1.235mm, minimum size=4mm, inner sep=0mm, star points=5, draw=lightgray, anchor=inner point 2, xshift=0.7mm] (someexcept) at (try.center) {};
+            \draw[lightgray, dash pattern=on 1.5pt off 1.5pt, ->, looseness=0.5] (someexcept) to[out=0,in=90] ($(catch.north)!0.5!(catch.north east)$);
+            \draw[->] (0,0) -- (try.north);
+            \draw[white, ->] (try.north) -- (try.north |- someexcept.inner point 1);
+            \draw[white, ->] ($(catch.north)!0.5!(catch.north east)$) -- ($(catch.south)!0.5!(catch.south east)$);
+            \draw[->] (try.south |- catch.south) -- +(0,-0.25);
+            \draw[coralcontrast,-] ($(catch.south west)+(-0.2pt,0mm)$) -- (try.south west |- catch.south);
+        \end{tikzpicture}
+    \end{minipage}
+\end{minipage}
 
-    \end{tikzpicture}
-\end{minipage}}
 
-\vspace{-2ex}
 \subsection{Stack Unwinding}
 \begin{itemize}
     \item Baue solange Methoden-Frames vom Stack ab, bis Exception behandelt wird
-    \item Falls \lstinline{main()} mit Exception zurückkehrt, behandelt JVM Exception mit Programmabbruch
+    \item Falls \lstinline{main()} mit Exception returnt, behandelt JVM diese mit Programmabbruch
 \end{itemize}
+
+% \vfill\null%
 
 \subsection{Error vs. Exception}
 \vspace{-.9\abovedisplayskip}
@@ -101,7 +115,7 @@
 \subsection{\textsf{\textbf{\textcolor{keywordcolour}{finally}}}-Ablauf}
 \vspace{-.9\abovedisplayskip}
 \begin{minipage}[t]{0.33\columnwidth}
-    \subsubsection{Normalfall}
+    \subsubsection{Keine Exception}
     \begin{tikzpicture}[every node/.style={draw, 
         fill=bluecontrast, 
         text=white, 
@@ -172,7 +186,7 @@
 \end{minipage}
 \lstinline{finally}-Block wird immer ausgeführt, auch wenn \lstinline{catch}-Block eine Exception wirft.
 
-\vspace{1ex}
+% \vspace{1ex}
 \begin{minipage}[t]{0.6\columnwidth}
     \subsection{try-with-resources}
     \begin{itemize}

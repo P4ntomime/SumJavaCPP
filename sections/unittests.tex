@@ -1,18 +1,23 @@
 \section{Unit Tests}
 
-\begin{minipage}[t]{0.65\columnwidth}
+\begin{minipage}[t]{0.58\columnwidth}
     \subsection{Konzept}
+    \raggedright%
     \begin{itemize}
         \item Test von abgenzbarem Programmteil (Unit)
-        \item Regressionstest: hat eine Änderung die bestehenden Funktionen geschädigt?
+        \item Regressionstest: hat eine Änderung bestehende Funktionen geschädigt?
     \end{itemize}
 \end{minipage}\hfill%
-\begin{minipage}[t]{0.31\columnwidth}
+\begin{minipage}[t]{0.26\columnwidth}
     \subsection{Blackbox-Test}
-    \begin{tikzpicture}[>=Stealth]
-        \node[minimum height=6mm, fill=black, text=white] (bbox) at (0,0) {Code};
-        \draw[<-] (bbox.west) -- ++(-1,0) node[midway, above=-0.7mm] {Input};
-        \draw[->] (bbox.east) -- ++(1,0) node[midway, above=-0.7mm] {Output};
+    \raggedright%
+    Testfälle aus Anforderungs- und Schnittstellenbeschr. herleiten
+\end{minipage}
+\begin{minipage}[t]{0.14\columnwidth}
+    \begin{tikzpicture}[baseline=(current bounding box.north), >=Stealth]
+        \node[minimum height=5mm, fill=black, text=white] (bbox) at (0,0) {Code};
+        \draw[<-] (bbox.north) -- ++(0,0.5) node[midway, right=-0.7mm] {Input};
+        \draw[->] (bbox.south) -- ++(0,-0.5) node[midway, right=-0.7mm] {Output};
     \end{tikzpicture}
 \end{minipage}
 \vspace{-0.5\abovedisplayskip}

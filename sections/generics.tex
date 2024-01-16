@@ -13,89 +13,75 @@ Generics werden verwendet um einen einheitlichen Elementtypen zu forcieren. Beis
 \begin{minipage}[t]{0.6\columnwidth}
     \subsubsection{Verschiedene generische Typen}
     \lstinputlisting[morekeywords={Integer}]{snippets/gentyp1.java}
+    \subsubsection{Kein Type-Cast}
+    \lstinputlisting{snippets/gentyp3.java}
 \end{minipage}\hfill%
 \begin{minipage}[t]{0.4\columnwidth}
     \subsubsection{Statische Typ-Prüfung}
     \lstinputlisting{snippets/gentyp2.java}
 \end{minipage}
 
-\subsubsection{Kein Type-Cast}
-\lstinputlisting{snippets/gentyp3.java}
 
-\subsection{Generische Klasse}
-\vspace{-0.7\abovedisplayskip}
-\begin{minipage}[t]{0.5\columnwidth}
+
+\begin{minipage}[t]{0.51\columnwidth}
+    \subsection{Generische Klasse}
     \subsubsection{Typ-Parameter}
+    \raggedright%
     Platzhalter für generischen Typ.
     \lstinputlisting[escapechar=!]{snippets/genclass1.java}
+    \begin{itemize}
+        \item Typ-Parameter dient als "Typ-Variable" innerhalb generischer Klassen.
+        \item Wie normaler Typ verwendbar.
+    \end{itemize}
     \begin{tikzpicture}[remember picture, overlay]
-        \draw[semithick, color=bluecontrast,decoration={brace,mirror,raise=1pt}, decorate] (tp1.south) -- node[text=bluecontrast,below=3pt] {Typ-Parameter} (tp2.south);
+        \draw[semithick, color=bluecontrast,decoration={brace,mirror,raise=-1pt}, decorate] (tp1.south) -- node[text=bluecontrast,below=1pt] {Typ-Parameter} (tp2.south);
     \end{tikzpicture}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.5\columnwidth}
+    \vspace{-0.8\abovedisplayskip}
     \subsubsection{Typ-Argument}
     Typ bei Einsatz angeben.
-    \lstinputlisting[style=basestyle,numbers=left,xleftmargin=1.2em,escapechar=!]{snippets/genclass2.java}
+    \lstinputlisting[style=basestyle, basicstyle=\sffamily, numbers=left,xleftmargin=1.2em,escapechar=!]{snippets/genclass2.java}
     \begin{tikzpicture}[remember picture, overlay]
-        \draw[semithick, color=redcontrast,decoration={brace,mirror,raise=1pt}, decorate] (ta1.south) -- node[text=redcontrast,below=3pt] {Typ-Argument} (ta2.south);
+        \draw[semithick, color=redcontrast,decoration={brace,mirror,raise=-1pt}, decorate] (ta1.south) -- node[text=redcontrast,below=1pt] {Typ-Argument} (ta2.south);
     \end{tikzpicture}
-\end{minipage}
-
-\begin{itemize}
-    \item Typ-Parameter dient als "Typ-Variable" innerhalb der generischen Klasse.
-    \item Wie normaler Typ verwendbar.
-\end{itemize}
-
-\subsection{Generische Methode}
-
-\begin{minipage}[t]{0.5\columnwidth}
-    \vspace{-0.8\abovedisplayskip}
-    \lstinputlisting{snippets/genmet1.java}
 \end{minipage}\hfill%
-\begin{minipage}[t]{0.49\columnwidth}
+\begin{minipage}[t]{0.48\columnwidth}
+    \subsection{Generische Methode}
+    \lstinputlisting{snippets/genmet1.java}
     \raggedright%
     Beim Aufruf generischer Methoden muss der Typ nicht angegeben werden.
-\end{minipage}
-
-
-\subsection{Generische Interfaces}
-\subsubsection{Beispiel mit Iterator}
-\begin{minipage}[t]{0.5\columnwidth}
-    \vspace{-0.7\abovedisplayskip}
+    
+    \vspace{0.8pt}
+    \subsection{Generische Interfaces}
+    \subsubsection{Beispiel mit Iterator}
     \lstinputlisting{snippets/genint1.java}
-\end{minipage}\hfill%
-\begin{minipage}[t]{0.5\columnwidth}
-    \vspace{-0.7\abovedisplayskip}
     \lstinputlisting{snippets/genint2.java}
 \end{minipage}
 
-\subsection{Iteration}
-\begin{minipage}[t]{0.32\columnwidth}
+
+\begin{minipage}[b]{0.32\columnwidth}
+    \subsection{Iteration}
     For-Schleife:
     \lstinputlisting{snippets/genericfor1.java}
 \end{minipage}\hfill%
-\begin{minipage}[t]{0.68\columnwidth}
+\begin{minipage}[b]{0.68\columnwidth}
     Tatsächlich generierter Code:
     \lstinputlisting{snippets/genericfor2.java}
 \end{minipage}
 
-\subsection{Type Bounds}
-\vspace{-0.8\abovedisplayskip}
-\begin{minipage}[t]{0.39\columnwidth}
+\begin{minipage}[t]{0.54\columnwidth}
+    \subsection{Type Bounds}
+    \subsubsection{Beispiel}
+    \lstinputlisting{snippets/gentb1.java}
+    Mehrere Bounds sind mit \& zu verknüpfen.
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.45\columnwidth}
     \subsubsection{Nutzen}
     \raggedright%
     \begin{itemize}
         \item Typ-Argument \textbf{muss} Subtyp von \lstinline{Graphic} sein
+        \item Bei Verwendung von spez. Methoden in gen. Methode/Klasse
     \end{itemize}
-\end{minipage}\hfill%
-\begin{minipage}[t]{0.6\columnwidth}
-    \subsubsection{Beispiel}
-    \lstinputlisting{snippets/gentb1.java}
-    Mehrere Bounds können mit \& verknüpft werden.
 \end{minipage}
-\begin{itemize}
-    \item Bei Verwendung von spez. Funktionen innerh.\ generischer Funktion/Klasse
-\end{itemize}
 
 
 % \vfill\null%
