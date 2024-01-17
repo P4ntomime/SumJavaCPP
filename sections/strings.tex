@@ -1,0 +1,18 @@
+\section{Strings}
+
+\begin{tabular}{@{}l l@{}}
+    \textbf{Methode} & \textbf{Beschreibung}\\\hhline{==}
+    \lstinline|charAt(int idx)| & Zeichen an Position \lstinline|idx|\\\hhline{--}
+    \lstinline|length()| & Länge des Strings\\\hhline{--}
+    \lstinline|substring(int start, int end)| & Teilstring von \lstinline|start| bis \lstinline|end|\\\hhline{--}
+    \lstinline|indexOf(String s)| & Position des ersten Vorkommens von \lstinline|s|\\\hhline{--}
+    \lstinline|lastIndexOf(String s)| & Position des letzten Vorkommens von \lstinline|s|\\\hhline{--}
+    \lstinline|compareToIgnoreCase(String s)| & Vergleicht Strings (returnt 0 bei Gleichheit)\\\hhline{--}
+    \lstinline|isEmpty()| & Returnt \lstinline|true|, wenn String leer ist\\\hhline{--}
+    \lstinline|replace("tgt", "rep")| & Ersetzt alle Vorkommen von \lstinline|tgt| mit \lstinline|rep|\\\hhline{--}
+    \lstinline|split(String regex)| & Teilt String anhand von \lstinline|regex|\\\hhline{--}
+    \lstinline|join("-", "a", "b")| & Verbindet Strings mit \lstinline|"-"| zu \lstinline|"a-b"|\\
+\end{tabular}
+
+\subsection{String zu Stream}
+\lstinputlisting{snippets/stringstream.java}

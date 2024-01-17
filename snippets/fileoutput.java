@@ -4,5 +4,4 @@ while(...){
     out.write(b);
 }
 out.close();!\lstnode{fileoutclose}!
-
 new FileOutputStream("out.txt", true);!\lstnode{fileoutappend}!

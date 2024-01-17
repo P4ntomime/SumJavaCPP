@@ -4,12 +4,12 @@
 % DONE: Character Stream
 % DONE: File I/O
     % DONE: Zeilenweise lesen
-% TODO: Wichtige Methoden
+% DONE: Wichtige Methoden
 % DONE: Standard I/O
     % DONE: Zeilenweise lesen 
-% TODO: Klassenhierarchie
-% TODO: Exceptions
-% TODO: "einfachste Zugriffe"
+% DONE: Klassenhierarchie
+% DONE: Exceptions
+% DONE: "einfachste Zugriffe"
 
 \subsection{Streams allgemein}
 \vspace{-0.7\abovedisplayskip}
@@ -28,7 +28,33 @@
     \end{itemize}
 \end{minipage}
 
-\begin{minipage}[t]{0.5\columnwidth}
+
+\subsection{Standard I/O}
+\vspace{-0.7\abovedisplayskip}
+\begin{minipage}[t]{0.4\columnwidth}
+    \subsubsection{\textsf{System.in}}
+    \begin{itemize}
+        \item \lstinline{InputStream}
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.59\columnwidth}
+    \subsubsection{\textsf{System.out} und \textsf{System.err}}
+    \begin{itemize}
+        \item \lstinline{PrintStream} (Subklasse von \lstinline{OutputStream})
+    \end{itemize}
+\end{minipage}
+
+
+\begin{minipage}[t]{0.38\columnwidth}
+    \subsection{Character Streams}
+    \raggedright%
+    \begin{itemize}
+        \item Unicode mit 16-Bit (UTF-16) codiert
+        \item Erben von: \lstinline{Reader}, \lstinline{Writer}
+        \item Zeichen-/Zeilenweise Ein- \& Ausgabe
+    \end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.61\columnwidth}
     \subsection{Byte Streams}
     \raggedright%
     \begin{itemize}
@@ -36,15 +62,6 @@
         \item Erben von: \lstinline{InputStream}, \lstinline{OutputStream}
         \item Beispiel: \lstinline{FileInputStream}, \lstinline{FileOutputStream}
         \item Close bei Exceptions: \lstinline{in.close()} in \lstinline{finally}-Block
-    \end{itemize}
-\end{minipage}\hfill%
-\begin{minipage}[t]{0.49\columnwidth}
-    \subsection{Character Streams}
-    \raggedright%
-    \begin{itemize}
-        \item Unicode mit 16-Bit (UTF-16) codiert
-        \item Erben von: \lstinline{Reader}, \lstinline{Writer}
-        \item Zeichen-/Zeilenweise Ein- \& Ausgabe
     \end{itemize}
 \end{minipage}
 
@@ -64,7 +81,6 @@
 \end{itemize}
 
 \subsection{File-Input}
-% \subsubsection{Beispiel}
 \vspace{-0.7\abovedisplayskip}
 \begin{minipage}[t]{0.6\columnwidth}
     \lstinputlisting[escapechar=!]{snippets/fileinput.java}
@@ -92,7 +108,6 @@
 \end{minipage}
 
 \subsection{File-Output}
-% \subsubsection{Beispiel}
 \vspace{-0.7\abovedisplayskip}
 \begin{minipage}[t]{0.6\columnwidth}
     \lstinputlisting[escapechar=!]{snippets/fileoutput.java}
@@ -140,31 +155,18 @@
         remember picture, 
         overlay,
         >=Stealth]
-        \node (readall) at ($(fileinreadall.south -| fintxt.south)+(0,-3mm)$) {Speicherintensiv bei grossen Dateien};
+        \node (readall) at ($(fileinreadall.south -| fintxt.south)+(0,-2.5mm)$) {Speicherintensiv bei grossen Dateien};
         \draw[->] (readall.west) -| (fileinreadall.south);
     \end{tikzpicture}
 \end{minipage}
     
-\vspace{3mm}
+\vspace{1mm}
 \begin{minipage}[t]{0.48\columnwidth}
     Ganze Datei binär schreiben:
     \lstinputlisting{snippets/fileoutput2.java}
 \end{minipage}
 
-\subsection{Standard I/O}
-\vspace{-0.7\abovedisplayskip}
-\begin{minipage}[t]{0.4\columnwidth}
-    \subsubsection{\textsf{System.in}}
-    \begin{itemize}
-        \item \lstinline{InputStream}
-    \end{itemize}
-\end{minipage}\hfill%
-\begin{minipage}[t]{0.59\columnwidth}
-    \subsubsection{\textsf{System.out} und \textsf{System.err}}
-    \begin{itemize}
-        \item \lstinline{PrintStream} (Subklasse von \lstinline{OutputStream})
-    \end{itemize}
-\end{minipage}
+
 
 \subsection{File-Reader}
 \begin{minipage}[t]{0.55\columnwidth}
@@ -198,7 +200,7 @@
     every node/.style={
     align=center,
     minimum width=8mm,
-    minimum height=1cm,
+    minimum height=8mm,
     draw,
     rounded corners=2mm},
     >=Stealth]
